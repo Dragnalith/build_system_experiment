@@ -16,7 +16,7 @@ popd () {
 CLANG=clang++
 GCC=/usr/local/bin/g++-9
 
-BUILD_DIR=out-build-sh
+BUILD_DIR=../out/build-sh
 IMD_DIR="$BUILD_DIR/intermediate"
 OUT_DIR="$BUILD_DIR/out"
 

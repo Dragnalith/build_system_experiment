@@ -1,0 +1,24 @@
+CLANG=clang++
+GCC=/usr/local/bin/g++-9
+
+src_dir=../..
+builddir=../../../out/build-ninja-osx
+out_dir=$builddir/out
+imd_dir=$builddir/intermediate
+
+rule clang
+  command = $CLANG -c -o $out $in
+rule clang-link
+  command = $CLANG -g -o $out $in
+  
+rule gcc
+  command = $GCC -c $in -o $out
+rule gcc-link
+  command = $GCC -g $in -o $out
+  
+build $imd_dir/clang/HelloWorld.o: clang $src_dir/src/HelloWorld.cpp
+build $out_dir/clang/HelloWorld: clang-link $imd_dir/clang/HelloWorld.o  
+build $imd_dir/gcc/HelloWorld.o: gcc $src_dir/src/HelloWorld.cpp
+build $out_dir/gcc/HelloWorld: gcc-link $imd_dir/gcc/HelloWorld.o
+
+default $out_dir/gcc/HelloWorld $out_dir/clang/HelloWorld

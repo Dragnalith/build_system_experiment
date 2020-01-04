@@ -1,6 +1,12 @@
+# Overview
 The 'project' represent the source tree we want to build. In a real scenario it would
 be the root directory of the repository.
 
+# How To Use
+On OS X
+- Use build.sh to build with bash
+
+# Goal Output Directory
 See below the output directory we want to achieve:
 ```
 build_output/

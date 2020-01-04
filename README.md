@@ -1,3 +1,5 @@
+# Purpose
+
 The purpose of that repository is to evaluate different build system.
 
 For that I am creating the mock 'project' folder and will configure its build with different build system.

@@ -1,0 +1,23 @@
+if (target_os == "") {
+  target_os = host_os
+}
+if (target_cpu == "") {
+  target_cpu = host_cpu
+}
+if (current_cpu == "") {
+  current_cpu = target_cpu
+}
+if (current_os == "") {
+  current_os = target_os
+}
+
+mac_toolchain = "//build-gn/mac/toolchain/clang"
+mac_gcc_toolchain = "//build-gn/mac/toolchain/gcc"
+
+if (current_os == "mac") {
+  set_default_toolchain("$mac_toolchain")
+} else if (current_os == "mac_gcc") {
+  set_default_toolchain("$mac_gcc_toolchain")
+} else {
+  assert(false)
+}

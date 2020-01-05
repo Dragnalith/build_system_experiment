@@ -1,0 +1,12 @@
+group("all") {
+  deps = [
+    "//src:HelloWorld",
+  ]
+}
+
+group("default") {
+  deps = [
+    "//:all($mac_toolchain)",
+    "//:all($mac_gcc_toolchain)",
+  ]
+}

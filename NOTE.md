@@ -15,3 +15,5 @@ platform may need the same tool (some texture converter, same code generator) an
 - I have just realized it was not possible to add a custom toolchain on premake with Ninja.
 # 2 Fev 2020:
 - Actually I wonder actually why I thought Ninja generator for premake is not compatible with custom toolchain. In particular is C# compatible with ninja generator for premake?
+- I have added binary for ninja.exe and gn.exe
+- Compiling from command line with msvc in not convenient because you need a special environment to be setup.

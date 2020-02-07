@@ -27,26 +27,22 @@ REM start compilation
 
 setlocal
 set Path=%MSVC_DIR%\bin\Hostx64\x64;%Path%
-set INCLUDE=%MSVC_DIR%\include;%WINSDK_INCLUDE%\ucrt
-set LIB=%MSVC_DIR%\lib\x64;%WINSDK_LIB%\ucrt\x64;%WINSDK_LIB%\um\x64
 set imd=%IMD_DIR%\cl_64
 set out=%OUT_DIR%\cl_64
 mkdir "%imd%" || goto :error
 mkdir "%out%" || goto :error
-cl.exe /c /EHsc /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
-link.exe /out:"%out%\HelloWorld.exe" "%imd%\HelloWorld.obj" || goto :error
+cl.exe /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
+link.exe /LIBPATH:"%MSVC_DIR%\lib\x64" /LIBPATH:"%WINSDK_LIB%\ucrt\x64" /LIBPATH:"%WINSDK_LIB%\um\x64" /out:"%out%\HelloWorld.exe" "%imd%\HelloWorld.obj" || goto :error
 endlocal
 
 setlocal
 set Path=%MSVC_DIR%\bin\Hostx86\x86;%Path%
-set INCLUDE=%MSVC_DIR%\include;%WINSDK_INCLUDE%\ucrt
-set LIB=%MSVC_DIR%\lib\x86;%WINSDK_LIB%\ucrt\x86;%WINSDK_LIB%\um\x86
 set imd=%IMD_DIR%\cl_86
 set out=%OUT_DIR%\cl_86
 mkdir "%imd%" || goto :error
 mkdir "%out%" || goto :error
-cl.exe /c /EHsc /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
-link.exe /out:"%out%\HelloWorld.exe" "%imd%\HelloWorld.obj" || goto :error
+cl.exe /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
+link.exe /LIBPATH:"%MSVC_DIR%\lib\x86" /LIBPATH:"%WINSDK_LIB%\ucrt\x86" /LIBPATH:"%WINSDK_LIB%\um\x86" /out:"%out%\HelloWorld.exe" "%imd%\HelloWorld.obj" || goto :error
 endlocal
 
 echo Build is success

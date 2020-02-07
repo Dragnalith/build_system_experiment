@@ -17,3 +17,4 @@ platform may need the same tool (some texture converter, same code generator) an
 - Actually I wonder actually why I thought Ninja generator for premake is not compatible with custom toolchain. In particular is C# compatible with ninja generator for premake?
 - I have added binary for ninja.exe and gn.exe
 - Compiling from command line with msvc in not convenient because you need a special environment to be setup.
+- It seems that actually special environment is not required except PATH. Indeed, DLL required by msvc are needed to be on the PATH before the compiler or linker run. Other include and lib variable can be set on the command line.

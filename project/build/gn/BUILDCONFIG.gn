@@ -11,8 +11,8 @@ if (current_os == "") {
   current_os = target_os
 }
 
-mac_toolchain = "//build-gn/mac/toolchain/clang"
-mac_gcc_toolchain = "//build-gn/mac/toolchain/gcc"
+mac_toolchain = "//build/gn/mac/toolchain/clang"
+mac_gcc_toolchain = "//build/gn/mac/toolchain/gcc"
 
 if (current_os == "mac") {
   set_default_toolchain("$mac_toolchain")

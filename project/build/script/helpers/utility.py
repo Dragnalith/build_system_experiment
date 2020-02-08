@@ -30,6 +30,7 @@ def write_environment_block(filepath, env):
         a pointer to that buffer can be given to CreateProcess without any required processing.
     """
     filepath.parent.mkdir(parents=True,exist_ok=True)
+
     with open(filepath, 'w') as f:
         block = ''
         nul = '\0'
@@ -44,7 +45,24 @@ def write_ninja_file(filepath, env):
         So the output file can be included by another ninja file.
     """
     filepath.parent.mkdir(parents=True,exist_ok=True)
+
     with open(filepath, 'w') as f:
         for key, value in env.items():
             f.write("{}={}\n".format(key,value))
 
+class IncompatibleTypeError(Exception):
+    """Requested folder has not been found"""
+    pass
+
+def convert_to_gn_str(value):
+    if isinstance(value, str):
+        return '"{}"'.format(value.replace('"','\\"'))
+
+    if isinstance(value, int):
+        return str(value)
+
+    if isinstance(value, pathlib.Path):
+        value.resolve()
+        return convert_to_gn_str(str(value))
+
+    raise IncompatibleTypeError('The type {} cannot be converted to gn value'.format(type(value)))

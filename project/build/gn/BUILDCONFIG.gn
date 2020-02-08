@@ -11,13 +11,39 @@ if (current_os == "") {
   current_os = target_os
 }
 
-mac_toolchain = "//build/gn/mac/toolchain/clang"
-mac_gcc_toolchain = "//build/gn/mac/toolchain/gcc"
+if (current_os == "mac") {
+  is_mac = true
+  is_win = false
+} else if (current_os == "mac_gcc") {
+  is_mac = true
+  is_win = false
+} else if (current_os == "win") {
+  is_mac = false
+  is_win = true
+} else if (current_os == "win_x86") {
+  is_mac = false
+  is_win = true
+} else {
+  print(current_os)
+  assert(false)
+}
+
+if (is_mac) {
+  mac_toolchain = "//build/gn/mac/toolchain/clang"
+  mac_gcc_toolchain = "//build/gn/mac/toolchain/gcc"
+} else if (is_win) {
+  win_toolchain = "//build/gn/windows/toolchain/msvc_x64"
+  win_x86_toolchain = "//build/gn/windows/toolchain/msvc_x86"
+}
 
 if (current_os == "mac") {
   set_default_toolchain("$mac_toolchain")
 } else if (current_os == "mac_gcc") {
   set_default_toolchain("$mac_gcc_toolchain")
+} else if (current_os == "win") {
+  set_default_toolchain("$win_toolchain")
+} else if (current_os == "win_x86") {
+  set_default_toolchain("$win_toolchain")
 } else {
   assert(false)
 }

@@ -4,9 +4,18 @@ group("all") {
   ]
 }
 
-group("default") {
-  deps = [
-    "//:all($mac_toolchain)",
-    "//:all($mac_gcc_toolchain)",
-  ]
+if (is_mac) {
+  group("default") {
+    deps = [
+      "//:all($mac_toolchain)",
+      "//:all($mac_gcc_toolchain)",
+    ]
+  }
+} else if (is_win) {
+  group("default") {
+    deps = [
+      "//:all($win_toolchain)",
+      "//:all($win_x86_toolchain)",
+    ]
+  }
 }

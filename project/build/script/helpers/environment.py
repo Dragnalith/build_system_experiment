@@ -10,6 +10,11 @@ class UnknownSystem(Exception):
     pass
 
 class Environment:
+    """
+        This is a helper class to be used as a global.
+        It centralize the repository configuration (filetree, etc.)
+        So other script can only depend on variable
+    """
     def __init__(self):
         self.root = util.find_root_mark('RootMark')
         self.system = platform.system()

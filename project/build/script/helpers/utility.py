@@ -5,6 +5,11 @@ class FolderNotFound(Exception):
     pass
 
 def find_root_mark(mark: str):
+    """
+        It will find the first folder in the hierarchy of the working directory which
+        contains the file of name 'mark'.It will raise an error if such a folder does
+        not exist
+    """
     start_dir = pathlib.Path(__file__).parent
     current_dir = start_dir
 
@@ -19,6 +24,11 @@ def find_root_mark(mark: str):
     return current_dir
 
 def write_environment_block(filepath, env):
+    """
+        Write a dict as a file using the format required by the windows API CreateProcess to
+        specify environment variable for the process. The file can be read as a raw buffer and
+        a pointer to that buffer can be given to CreateProcess without any required processing.
+    """
     filepath.parent.mkdir(parents=True,exist_ok=True)
     with open(filepath, 'w') as f:
         block = ''
@@ -29,6 +39,10 @@ def write_environment_block(filepath, env):
         f.write(block)
 
 def write_ninja_file(filepath, env):
+    """
+        Write variable with the ninja file format.
+        So the output file can be included by another ninja file.
+    """
     filepath.parent.mkdir(parents=True,exist_ok=True)
     with open(filepath, 'w') as f:
         for key, value in env.items():

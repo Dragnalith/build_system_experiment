@@ -4,6 +4,13 @@ import helpers.utility as util
 import helpers.winsdk as winsdk
 import helpers.vstudio as vstudio
 
+"""
+Configure the build for the raw ninja file under build/gn/ninja/windows/build.ninja
+
+In short it finds MSVC and Windows SDK and generate data to be used by ninja during
+the build
+"""
+
 build_dir = env.path.root / 'out/build-ninja-windows'
 env_x64 = build_dir / 'env.x64'
 env_x86 = build_dir / 'env.x86'

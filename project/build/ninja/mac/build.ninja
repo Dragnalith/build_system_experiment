@@ -1,8 +1,8 @@
 CLANG=clang++
 GCC=/usr/local/bin/g++-9
 
-src_dir=../..
-builddir=../../../out/build-ninja-osx
+src_dir=../../..
+builddir=../../../../out/build-ninja-mac
 out_dir=$builddir/out
 imd_dir=$builddir/intermediate
 

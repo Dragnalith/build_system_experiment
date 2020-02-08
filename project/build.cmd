@@ -5,7 +5,7 @@ REM The script purpose is to demonstrate the build with a bash script
 REM Of course it will not support incremental build
 
 REM SETTING
-
+echo %TMP%
 set MSVC_DIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023
 set WINSDK_VER=10.0.18362.0
 set WINSDK_INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\%WINSDK_VER%
@@ -27,8 +27,8 @@ REM start compilation
 
 setlocal
 set Path=%MSVC_DIR%\bin\Hostx64\x64;%Path%
-set imd=%IMD_DIR%\cl_64
-set out=%OUT_DIR%\cl_64
+set imd=%IMD_DIR%\Win64
+set out=%OUT_DIR%\Win64
 mkdir "%imd%" || goto :error
 mkdir "%out%" || goto :error
 cl.exe /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
@@ -37,8 +37,8 @@ endlocal
 
 setlocal
 set Path=%MSVC_DIR%\bin\Hostx86\x86;%Path%
-set imd=%IMD_DIR%\cl_86
-set out=%OUT_DIR%\cl_86
+set imd=%IMD_DIR%\Win32
+set out=%OUT_DIR%\Win32
 mkdir "%imd%" || goto :error
 mkdir "%out%" || goto :error
 cl.exe /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error

@@ -1,0 +1,26 @@
+root_dir=..\..\..\..
+
+src_dir=$root_dir\project
+builddir=$root_dir\out\build-ninja-windows
+ninja=$root_dir\bin\windows\ninja.exe
+
+include $builddir\config.ninja
+
+out_dir=$builddir\out
+imd_dir=$builddir\intermediate
+
+rule cl_x64
+  command = $ninja -t msvc -e $builddir/env.x64 -- cl.exe /c /nologo /EHsc /I "$msvc_dir\include" /I "$winsdk_include\ucrt" /Fo"$out" "$in"
+rule link_64
+  command = $ninja -t msvc -e $builddir/env.x64 -- link.exe /LIBPATH:"$msvc_dir\lib\x64" /LIBPATH:"$winsdk_lib\ucrt\x64" /LIBPATH:"$winsdk_lib\um\x64" /out:"$out" "$in"
+rule cl_x86
+  command = $ninja -t msvc -e $builddir/env.x86 -- cl.exe /c /nologo /EHsc /I "$msvc_dir\include" /I "$winsdk_include\ucrt" /Fo"$out" "$in"
+rule link_86
+  command = $ninja -t msvc -e $builddir/env.x86 -- link.exe /LIBPATH:"$msvc_dir\lib\x86" /LIBPATH:"$winsdk_lib\ucrt\x86" /LIBPATH:"$winsdk_lib\um\x86" /out:"$out" "$in"
+  
+build $imd_dir/Win64/HelloWorld.obj: cl_x64 $src_dir/src/HelloWorld.cpp
+build $out_dir/Win64/HelloWorld.exe: link_64 $imd_dir/Win64/HelloWorld.obj
+build $imd_dir/Win32/HelloWorld.obj: cl_x86 $src_dir/src/HelloWorld.cpp
+build $out_dir/Win32/HelloWorld.exe: link_86 $imd_dir/Win32/HelloWorld.obj
+
+default $out_dir/Win32/HelloWorld.exe $out_dir/Win64/HelloWorld.exe

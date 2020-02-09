@@ -34,14 +34,14 @@ imd=$IMD_DIR/clang
 out=$OUT_DIR/clang
 mkdir -p $imd
 mkdir -p $out
-$CLANG -c -o $imd/HelloWorld.o src/HelloWorld.cpp
-$CLANG -g -o $out/HelloWorld $imd/HelloWorld.o
+$CLANG -c -o $imd/hello_world.o src/hello_world/main.cpp
+$CLANG -g -o $out/hello_world $imd/hello_world.o
 
 imd=$IMD_DIR/gcc
 out=$OUT_DIR/gcc
 mkdir -p $imd
 mkdir -p $out
-$GCC -c -o $imd/HelloWorld.o src/HelloWorld.cpp
-$GCC -g -o $out/HelloWorld $imd/HelloWorld.o
+$GCC -c -o $imd/hello_world.o src/hello_world/main.cpp
+$GCC -g -o $out/hello_world $imd/hello_world.o
 
 popd

@@ -1,5 +1,0 @@
-executable("HelloWorld") {
-  sources = [
-    "HelloWorld.cpp",
-  ]
-}

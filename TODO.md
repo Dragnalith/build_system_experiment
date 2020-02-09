@@ -5,7 +5,7 @@ simulate several platform
 - [x] Build with ninja on OS X
 - [x] Build with gn on OS X
 - [x] Build with ninja on Windows
-- [ ] Build with gn on Windows
+- [x] Build with gn on Windows
 - [ ] Experiment library and executable
 - [ ] Build a C++ tool which is used to generate .cpp file used in the build
 - [ ] Build tool which simulate different asset generation for different platform

@@ -31,8 +31,8 @@ set imd=%IMD_DIR%\Win64
 set out=%OUT_DIR%\Win64
 mkdir "%imd%" || goto :error
 mkdir "%out%" || goto :error
-cl.exe /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
-link.exe /LIBPATH:"%MSVC_DIR%\lib\x64" /LIBPATH:"%WINSDK_LIB%\ucrt\x64" /LIBPATH:"%WINSDK_LIB%\um\x64" /out:"%out%\HelloWorld.exe" "%imd%\HelloWorld.obj" || goto :error
+cl.exe /nologo /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\hello_world.obj" src\hello_world\main.cpp || goto :error
+link.exe /nologo /LIBPATH:"%MSVC_DIR%\lib\x64" /LIBPATH:"%WINSDK_LIB%\ucrt\x64" /LIBPATH:"%WINSDK_LIB%\um\x64" /out:"%out%\hello_world.exe" "%imd%\hello_world.obj" || goto :error
 endlocal
 
 setlocal
@@ -41,8 +41,8 @@ set imd=%IMD_DIR%\Win32
 set out=%OUT_DIR%\Win32
 mkdir "%imd%" || goto :error
 mkdir "%out%" || goto :error
-cl.exe /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\HelloWorld.obj" src\HelloWorld.cpp || goto :error
-link.exe /LIBPATH:"%MSVC_DIR%\lib\x86" /LIBPATH:"%WINSDK_LIB%\ucrt\x86" /LIBPATH:"%WINSDK_LIB%\um\x86" /out:"%out%\HelloWorld.exe" "%imd%\HelloWorld.obj" || goto :error
+cl.exe /nologo /c /EHsc /I "%MSVC_DIR%\include" /I "%WINSDK_INCLUDE%\ucrt" /Fo"%imd%\hello_world.obj" src\hello_world\main.cpp || goto :error
+link.exe /nologo /LIBPATH:"%MSVC_DIR%\lib\x86" /LIBPATH:"%WINSDK_LIB%\ucrt\x86" /LIBPATH:"%WINSDK_LIB%\um\x86" /out:"%out%\hello_world.exe" "%imd%\hello_world.obj" || goto :error
 endlocal
 
 echo Build is success

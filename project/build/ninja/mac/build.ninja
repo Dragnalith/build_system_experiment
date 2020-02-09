@@ -16,9 +16,9 @@ rule gcc
 rule gcc-link
   command = $GCC -g $in -o $out
   
-build $imd_dir/clang/HelloWorld.o: clang $src_dir/src/HelloWorld.cpp
-build $out_dir/clang/HelloWorld: clang-link $imd_dir/clang/HelloWorld.o  
-build $imd_dir/gcc/HelloWorld.o: gcc $src_dir/src/HelloWorld.cpp
-build $out_dir/gcc/HelloWorld: gcc-link $imd_dir/gcc/HelloWorld.o
+build $imd_dir/clang/hello_world.o: clang $src_dir/src/hello_world/main.cpp
+build $out_dir/clang/hello_world: clang-link $imd_dir/clang/hello_world.o  
+build $imd_dir/gcc/hello_world.o: gcc $src_dir/src/hello_world/main.cpp
+build $out_dir/gcc/hello_world: gcc-link $imd_dir/gcc/hello_world.o
 
-default $out_dir/gcc/HelloWorld $out_dir/clang/HelloWorld
+default $out_dir/gcc/hello_world $out_dir/clang/hello_world

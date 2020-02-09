@@ -124,3 +124,20 @@ if (platform_is_mac) {
 } else if (platform_is_win_x86) {
   set_default_toolchain("$toolchain_win_x86_msvc")
 }
+
+########################
+# Default Configuration
+########################
+
+set_defaults("executable") {
+  configs = [
+    "//build/gn/config:default_cpp"
+  ]
+}
+
+# Static library defaults.
+set_defaults("static_library") {
+  configs = [
+    "//build/gn/config:default_cpp"
+  ]
+}

@@ -1,14 +1,13 @@
 import("//build/gn/ninja.gni")
-import("//build/gn/win/config/winsdk.gni")
 
 touch_path = rebase_path("touch.py", root_build_dir)
 
 template("msvc_toolchain") {
-
   env = "msvc_environment." + invoker.toolchain_id
   env_path = rebase_path(root_build_dir + "/" + env)
-
-  msvc_config = exec_script("//build/script/setup_msvc_environment.py", [ invoker.vs_version, invoker.cpu, env_path,], "scope")
+  
+  msvc_config = exec_script("//build/script/find_msvc.py", [ "2017", invoker.cpu, ], "scope")
+  exec_script("//build/script/setup_msvc_environment.py", [ msvc_config.bin, env_path,], "scope")
 
   toolchain(target_name) {
     lib_switch = "" # built-in variable: How libraries input should be expanded
@@ -17,7 +16,7 @@ template("msvc_toolchain") {
     tool("cxx") {
       rspfile = "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.rsp"
       pdbname = "{{target_out_dir}}/{{target_output_name}}.{{source_name_part}}.pdb"
-      command = "$ninja -t msvc -e $env -- cl.exe /nologo /EHsc /I \"${msvc_config.include}\" /I \"${winsdk.include}\\ucrt\" /showIncludes /FC @$rspfile /c {{source}} /Fo{{output}} /Fd$pdbname"
+      command = "$ninja -t msvc -e $env -- cl.exe /nologo /EHsc /showIncludes /FC @$rspfile /c {{source}} /Fo{{output}} /Fd$pdbname"
       depsformat = "msvc"
       description = "CXX {{output}}"
       outputs = [
@@ -30,10 +29,10 @@ template("msvc_toolchain") {
       outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
       pdbfile = "{{output_dir}}/{{target_output_name}}.pdb"
       rspfile = "$outfile.rsp"
-      command = "$ninja -t msvc -e $env -- link.exe /nologo /LIBPATH:\"${msvc_config.lib}\" /LIBPATH:\"${winsdk.lib}\\ucrt\\${invoker.cpu}\" /LIBPATH:\"${winsdk.lib}\\um\\${invoker.cpu}\" /OUT:$outfile /PDB:$pdbfile @$rspfile"
+      command = "$ninja -t msvc -e $env -- link.exe /nologo /OUT:$outfile /PDB:$pdbfile @$rspfile"
       description = "LINK {{label}}"
       default_output_dir = "out/${invoker.toolchain_id}/bin"
-      rspfile_content = "{{inputs}}"
+      rspfile_content = "{{ldflags}} {{solibs}} {{libs}} {{inputs}}"
       outputs = [
         outfile
       ]

@@ -1,0 +1,24 @@
+config("toolchain_config") {
+  configs = []
+  if (os_is_win) {
+    configs += [
+      "//build/gn/config/win:toolchain_config"
+    ]
+  }
+}
+
+config("platform_config") {
+  configs = []
+  if (os_is_win) {
+    configs += [
+      "//build/gn/config/win:winsdk_config"
+    ]
+  }
+}
+
+config("default_cpp") {
+    configs = [
+      ":toolchain_config",
+      ":platform_config"
+    ]
+}

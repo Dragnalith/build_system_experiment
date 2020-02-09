@@ -1,0 +1,26 @@
+# On Windows, the default configuration requires MSVC and WinSDK configuration.
+
+assert(os_is_win)
+
+import("//build/gn/config/win/winsdk_config.gni")
+import("//build/gn/config/win/msvc_config.gni")
+
+config("winsdk_config") {
+  include_dirs = [
+    "/${winsdk_config.include}/ucrt",
+  ]
+  lib_dirs = [
+    "/${winsdk_config.lib}/ucrt/${current_cpu}",
+    "/${winsdk_config.lib}/um/${current_cpu}"
+  ]
+}
+
+config("toolchain_config") {
+  include_dirs = [
+    "/${msvc_config.include}",
+  ]
+  lib_dirs = [
+    "/${msvc_config.lib}",
+  ]
+}
+

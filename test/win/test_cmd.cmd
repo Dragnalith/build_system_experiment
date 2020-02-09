@@ -1,5 +1,5 @@
+@echo off
 setlocal
-echo off
 
 REM START
 pushd %~dp0

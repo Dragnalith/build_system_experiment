@@ -1,0 +1,11 @@
+# This file load winsdk configuration from python script.
+# Every other GN file including the current can access the winsdk_config variable
+#
+# winsdk_config has four variables:
+# - root: absolute path to the root folder (e.g C:\Program Files (x86)\Windows Kits\10)
+# - lib: absolute path to the librarie folder of the compiler (e.g  C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0)
+# - include: absolute path to the include folder of the compiler (e.g C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0)
+
+assert(os_is_win)
+
+winsdk_config = exec_script("//build/script/find_winsdk.py", [], "scope")

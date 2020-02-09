@@ -1,1 +1,0 @@
-  winsdk = exec_script("../../../script/find_winsdk.py", [], "scope")

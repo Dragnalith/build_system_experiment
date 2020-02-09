@@ -1,5 +1,5 @@
+@echo off
 setlocal
-echo off
 
 REM The script purpose is to demonstrate the build with a bash script
 REM Of course it will not support incremental build

@@ -1,5 +1,5 @@
+@echo off
 setlocal
-echo off
 
 pushd %~dp0
 

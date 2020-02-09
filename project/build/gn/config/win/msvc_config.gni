@@ -1,0 +1,12 @@
+# This file load winsdk configuration from python script.
+# Every other GN file including the current can access the winsdk_config variable
+#
+# msvc_config has four variables:
+# - root: absolute path to the root folder 
+# - lib: absolute path to the librarie folder of the compiler 
+# - include: absolute path to the include folder of the compiler 
+# - bin: absolute path to the binary folder of the compiler (folder containing cl.exe, link.exe, ...)
+
+assert(os_is_win)
+
+msvc_config = exec_script("//build/script/find_msvc.py", [ "2017", current_cpu, ], "scope")

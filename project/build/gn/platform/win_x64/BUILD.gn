@@ -3,6 +3,5 @@ import("//build/gn/toolchain/msvc.gni")
 msvc_toolchain("msvc") {
   os = "win"
   cpu = "x64"
-  vs_version = "2017"
   toolchain_id = "Win64"
 }

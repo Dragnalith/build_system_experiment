@@ -1,8 +1,8 @@
 root_dir=..\..\..\..
 
 src_dir=$root_dir\project
-builddir=$root_dir\out\build-ninja-windows
-ninja=$root_dir\bin\windows\ninja.exe
+builddir=$root_dir\out\build-ninja
+ninja=$root_dir\bin\win\ninja.exe
 
 include $builddir\config.ninja
 

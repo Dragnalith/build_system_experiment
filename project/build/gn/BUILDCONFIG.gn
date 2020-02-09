@@ -32,8 +32,8 @@ if (is_mac) {
   mac_toolchain = "//build/gn/mac/toolchain/clang"
   mac_gcc_toolchain = "//build/gn/mac/toolchain/gcc"
 } else if (is_win) {
-  win_toolchain = "//build/gn/windows/toolchain/msvc_x64"
-  win_x86_toolchain = "//build/gn/windows/toolchain/msvc_x86"
+  win_toolchain = "//build/gn/win/toolchain/msvc_x64"
+  win_x86_toolchain = "//build/gn/win/toolchain/msvc_x86"
 }
 
 if (current_os == "mac") {

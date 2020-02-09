@@ -20,7 +20,7 @@ class Environment:
         self.system = platform.system()
 
         if self.system == 'Windows':
-            self.bin = self.root / 'bin/windows'
+            self.bin = self.root / 'bin/win'
             self.ninja = self.bin / 'ninja.exe'
             self.gn = self.bin / 'gn.exe'
             self.vswhere = self.bin / 'vswhere.exe'

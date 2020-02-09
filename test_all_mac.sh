@@ -15,8 +15,8 @@ popd () {
 set -e
 pushd $(dirname $0)
 
-test/mac/testBash.sh
-test/mac/testNinja.sh
-test/mac/testGN.sh
+test/mac/test_bash.sh
+test/mac/test_ninja.sh
+test/mac/test_gn.sh
 
 popd

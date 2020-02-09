@@ -15,7 +15,7 @@ popd () {
 set -e
 pushd $(dirname $0)
 
-rm -rf out/build-ninja-mac
+rm -rf out/build-ninja
 ../../bin/mac/ninja -C ../../project/build/ninja/mac
 
 popd

@@ -1,5 +1,5 @@
-import("//build/gn/windows/ninja.gni")
-import("//build/gn/windows/config/winsdk.gni")
+import("//build/gn/win/ninja.gni")
+import("//build/gn/win/config/winsdk.gni")
 
 touch_path = rebase_path("touch.py", root_build_dir)
 

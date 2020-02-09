@@ -1,0 +1,14 @@
+config("engine_config") {
+  include_dirs = [
+      "include"
+  ]
+}
+
+static_library("engine") {
+  sources = [
+    "src/Engine.cpp",
+  ]
+  all_dependent_configs = [
+    ":engine_config"
+  ]
+}

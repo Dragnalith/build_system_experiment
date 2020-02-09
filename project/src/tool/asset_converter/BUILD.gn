@@ -1,0 +1,5 @@
+executable("asset_converter") {
+  sources = [
+    "src/main.cpp",
+  ]
+}

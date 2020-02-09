@@ -1,0 +1,8 @@
+executable("runtime_app") {
+  sources = [
+    "src/main.cpp",
+  ]
+  deps = [
+    "//src/runtime/engine"
+  ]
+}

@@ -1,21 +1,22 @@
-group("all") {
+group("runtime") {
   deps = [
     "//src/hello_world",
+    "//src/runtime/runtime_app"
   ]
 }
 
 if (is_mac) {
   group("default") {
     deps = [
-      "//:all($mac_toolchain)",
-      "//:all($mac_gcc_toolchain)",
+      "//:runtime($mac_toolchain)",
+      "//:runtime($mac_gcc_toolchain)",
     ]
   }
 } else if (is_win) {
   group("default") {
     deps = [
-      "//:all($win_toolchain)",
-      "//:all($win_x86_toolchain)",
+      "//:runtime($win_toolchain)",
+      "//:runtime($win_x86_toolchain)",
     ]
   }
 }

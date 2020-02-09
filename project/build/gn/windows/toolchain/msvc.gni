@@ -40,6 +40,18 @@ template("msvc_toolchain") {
       default_output_extension = ".exe"
     }
 
+    tool("alink") {
+      rspfile = "{{output}}.rsp"
+      command = "$ninja -t msvc -e $env -- lib.exe /nologo /OUT:{{output}} @$rspfile"
+      description = "LIB {{output}}"
+      outputs = [
+        "{{target_out_dir}}/{{target_output_name}}{{output_extension}}",
+      ]
+      default_output_extension = ".lib"
+
+      rspfile_content = "{{inputs_newline}}"
+    }
+
     tool("stamp") {
       command = "python.exe $touch_path {{output}}"
       description = "STAMP {{output}}"

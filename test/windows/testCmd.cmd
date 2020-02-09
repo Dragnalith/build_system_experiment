@@ -4,7 +4,7 @@ echo off
 REM START
 pushd %~dp0
 
-call project\build.cmd || goto :error
+call ..\..\project\build.cmd || goto :error
 
 echo Test "Cmd" is success
 popd

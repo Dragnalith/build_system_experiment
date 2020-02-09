@@ -3,9 +3,9 @@ echo off
 
 pushd %~dp0
 
-call testCmd.cmd || goto :error
-call testNinja.cmd || goto :error
-call testGN.cmd || goto :error
+call test\windows\testCmd.cmd || goto :error
+call test\windows\testNinja.cmd || goto :error
+call test\windows\testGN.cmd || goto :error
 
 echo All test are successful
 popd

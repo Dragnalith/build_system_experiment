@@ -1,0 +1,7 @@
+# This file define the path to ninja to be used by toolchain
+
+if (host_os == "win") {
+    ninja = rebase_path("//../bin/win/ninja.exe", root_build_dir)
+} else if (host_os == "mac") {
+    ninja = rebase_path("//../bin/mac/ninja", root_build_dir)
+}

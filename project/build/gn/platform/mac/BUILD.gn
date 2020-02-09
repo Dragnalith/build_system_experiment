@@ -1,0 +1,15 @@
+import("//build/gn/toolchain/gcc_like.gni")
+
+gcc_like_toolchain("clang") {
+  os = "mac"
+  cpu = "x64"
+  compiler_path = "clang++"
+  toolchain_id = "mac_clang"
+}
+
+gcc_like_toolchain("gcc") {
+  os = "mac"
+  cpu = "x64"
+  compiler_path = "/usr/local/bin/g++-9"
+  toolchain_id = "mac_gcc"
+}

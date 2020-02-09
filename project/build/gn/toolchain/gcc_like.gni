@@ -1,0 +1,38 @@
+template("gcc_like_toolchain") {
+  toolchain(target_name) {
+    tool("cxx") {
+        depfile = "{{output}}.d"
+        command = "${invoker.compiler_path} -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
+        depsformat = "gcc"
+        description = "CXX {{output}}"
+        outputs = [
+        "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o",
+        ]
+    }
+
+    tool("link") {
+        outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
+        rspfile = "$outfile.rsp"
+        command = "${invoker.compiler_path} {{ldflags}} -o {{output}} @$rspfile {{solibs}} {{libs}}"
+        description = "LINK {{label}}"
+        default_output_dir = "out/${invoker.toolchain_id}/bin"
+        rspfile_content = "{{inputs}}"
+        outputs = [
+        outfile
+        ]
+    }
+
+    tool("stamp") {
+        command = "touch {{output}}"
+        description = "STAMP {{output}}"
+    }
+
+    toolchain_args = {
+        current_os = invoker.os
+        current_cpu = invoker.cpu
+
+        target_os = target_os
+        target_cpu = target_cpu
+    }
+  }
+}

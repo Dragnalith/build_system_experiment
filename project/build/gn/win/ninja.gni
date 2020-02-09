@@ -1,3 +1,0 @@
-# We need to have a path to ninja to execute 'ninja.exe -t msvc -e {env}' in order to run cl.exe
-
-ninja = rebase_path("../../../../bin/win/ninja.exe", root_build_dir)

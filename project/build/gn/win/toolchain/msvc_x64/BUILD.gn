@@ -1,7 +1,0 @@
-import("//build/gn/win/toolchain/msvc.gni")
-
-msvc_toolchain("msvc_x64") {
-  os = "win"
-  cpu = "x64"
-  vs_version = "2017"
-}

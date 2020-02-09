@@ -2,7 +2,7 @@ template("gcc_like_toolchain") {
   toolchain(target_name) {
     tool("cxx") {
         depfile = "{{output}}.d"
-        command = "${invoker.compiler_path} -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
+        command = "${invoker.cxx} -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
         depsformat = "gcc"
         description = "CXX {{output}}"
         outputs = [
@@ -13,13 +13,23 @@ template("gcc_like_toolchain") {
     tool("link") {
         outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
         rspfile = "$outfile.rsp"
-        command = "${invoker.compiler_path} {{ldflags}} -o {{output}} @$rspfile {{solibs}} {{libs}}"
+        command = "${invoker.cxx} {{ldflags}} -o {{output}} @$rspfile {{solibs}} {{libs}}"
         description = "LINK {{label}}"
         default_output_dir = "out/${invoker.toolchain_id}/bin"
         rspfile_content = "{{inputs}}"
         outputs = [
         outfile
         ]
+    }
+
+    tool("alink") {
+      command = "rm -f {{output}} && ${invoker.ar} rcs {{output}} {{inputs}}"
+      description = "AR {{output}}"
+      outputs = [
+        "{{target_out_dir}}/{{target_output_name}}{{output_extension}}",
+      ]
+      default_output_extension = ".a"
+      output_prefix = "lib"
     }
 
     tool("stamp") {

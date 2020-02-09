@@ -7,10 +7,10 @@ simulate several platform
 - [x] Build with ninja on Windows
 - [x] Build with gn on Windows
 - [x] Build static lib on Windows
-- [ ] Make toolchain include_dir and lib_path being defined in a default config instead of hardcoded
+- [x] Make toolchain include_dir and lib_path being defined in a default config instead of hardcoded
+- [ ] Improve the way we build for multiple platform at the same time
 - [ ] Make possible to specifiy Visual Studio version and WinSDK version
 - [ ] Tool and runtime target should not be outputed on the same folder
-- [ ] Improve the way we build for multiple platform at the same time
 - [ ] Build a C++ tool which is used to generate .cpp file used in the build
 - [ ] Build tool which simulate different asset generation for different platform
 - [ ] Research Incredibuild integration with ninja

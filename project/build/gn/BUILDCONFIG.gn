@@ -74,7 +74,7 @@ platform_is_console1 = false
 platform_is_console2 = false
 platform_name_mac = "Mac"
 platform_name_win_x64 = "Win64"
-platform_name_win_x86 = "Win86"
+platform_name_win_x86 = "Win32"
 platform_name_console1 = "Console1"
 platform_name_console2 = "Console2"
 platform_id_mac = "mac"
@@ -169,19 +169,19 @@ if (host_platform_is_mac) {
   toolchain_mac = toolchain_mac_clang
 
   runtime_toolchains = [
-    toolchain_mac,
-    toolchain_console1,
-    toolchain_console2,
+    ["mac", toolchain_mac,],
+    ["console1", toolchain_console1,],
+    ["console2", toolchain_console2,],
   ]
 } else if (host_platform_is_win_x64) {
   toolchain_win_x64 = toolchain_win_x64_msvc
   toolchain_win_x86 = toolchain_win_x86_msvc
 
   runtime_toolchains = [
-    toolchain_win_x64,
-    toolchain_win_x86,
-    toolchain_console1,
-    toolchain_console2,
+    ["win_x64", toolchain_win_x64, ],
+    ["win_x86", toolchain_win_x86, ],
+    ["console1", toolchain_console1, ],
+    ["console2",toolchain_console2, ],
   ]
 }
 

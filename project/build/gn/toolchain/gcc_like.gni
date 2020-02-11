@@ -28,7 +28,7 @@ template("gcc_like_toolchain") {
       outputs = [
         "{{output_dir}}/{{target_output_name}}{{output_extension}}",
       ]
-      default_output_dir = "out/${invoker.toolchain_id}/lib"
+      default_output_dir = "out/${target_name}/lib"
       default_output_extension = ".a"
       output_prefix = "lib"
     }

@@ -3,14 +3,14 @@ import("//build/gn/ninja.gni")
 touch_path = rebase_path("touch.py", root_build_dir)
 
 template("msvc_toolchain") {
-  env = "msvc_environment." + invoker.toolchain_id
+  env = "msvc_environment." + target_name
   env_path = rebase_path(root_build_dir + "/" + env)
   
-  # it is not possible to re-use msvc_config from //build/gn/config/win/msvc_config.gni
+  # it is not possible to re-use msvc from //build/gn/config/msvc_config.gni
   # because it is the value for the current_cpu, where here we want the value for 
   # the invoker.cpu
-  msvc_config = exec_script("//build/script/find_msvc.py", [ "2017", invoker.cpu, ], "scope")
-  exec_script("//build/script/setup_msvc_environment.py", [ msvc_config.bin, env_path,], "scope")
+  msvc = exec_script("//build/script/find_msvc.py", [ "2017", invoker.cpu, ], "scope")
+  exec_script("//build/script/setup_msvc_environment.py", [ msvc.bin, env_path,], "scope")
 
   toolchain(target_name) {
     lib_switch = "" # built-in variable: How libraries input should be expanded
@@ -34,7 +34,7 @@ template("msvc_toolchain") {
       rspfile = "$outfile.rsp"
       command = "$ninja -t msvc -e $env -- link.exe /nologo /OUT:$outfile /PDB:$pdbfile @$rspfile"
       description = "LINK {{label}}"
-      default_output_dir = "out/${invoker.toolchain_id}/bin"
+      default_output_dir = "out/${target_name}/bin"
       rspfile_content = "{{ldflags}} {{solibs}} {{libs}} {{inputs}}"
       outputs = [
         outfile

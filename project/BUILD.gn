@@ -5,18 +5,11 @@ group("runtime") {
   ]
 }
 
-if (host_os_is_mac) {
-  group("default") {
-    deps = [
-      "//:runtime($toolchain_mac_clang)",
-      "//:runtime($toolchain_mac_gcc)",
-    ]
-  }
-} else if (host_os_is_win) {
-  group("default") {
-    deps = [
-      "//:runtime($toolchain_win_x86_msvc)",
-      "//:runtime($toolchain_win_x64_msvc)",
-    ]
+group("default") {
+  deps = []
+  foreach(t, runtime_toolchains) {
+      deps += [
+        "//:runtime($t)"
+      ]
   }
 }

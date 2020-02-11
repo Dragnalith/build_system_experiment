@@ -13,6 +13,6 @@ const char* g_CompilerName = "Undefined Compiler";
 #endif
 
 int main() {
-    std::cout << "Hello World from " << g_CompilerName << "\n";
+    std::cout << "Hello World from compiler" << g_CompilerName << "\n";
     return 0;
 }

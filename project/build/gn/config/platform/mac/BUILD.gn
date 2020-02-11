@@ -1,0 +1,5 @@
+config("mac") {
+  defines = [
+      "DRGN_PLATFORM_IS_MAC=1"
+  ]
+}

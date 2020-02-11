@@ -1,0 +1,24 @@
+if (host_os_is_win) {
+    import("//build/gn/config/win/winsdk_config.gni")
+    import("//build/gn/config/win/msvc_config.gni")
+
+    winsdk_config("winsdk") {
+    }
+
+    msvc_config("msvc") {
+    }
+}
+
+config("console1") {
+  configs = []
+  if (host_os_is_win) {
+    configs += [
+        ":winsdk",
+        ":msvc",
+    ]
+  }
+  defines = [
+      "DRGN_PLATFORM_IS_CONSOLE1=1"
+  ]
+}
+

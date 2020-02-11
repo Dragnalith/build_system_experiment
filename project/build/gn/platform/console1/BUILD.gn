@@ -1,0 +1,17 @@
+if (host_os_is_win) {
+  import("//build/gn/toolchain/msvc.gni")
+
+  msvc_toolchain("console1_msvc_x86") {
+    os = "console1"
+    cpu = "x86"
+  }
+} else if (host_os_is_mac) {
+  import("//build/gn/toolchain/gcc_like.gni")
+
+  gcc_like_toolchain("console1_clang") {
+    os = "console1"
+    cpu = "x64"
+    cxx = "clang++"
+    ar = "ar"
+  }
+}

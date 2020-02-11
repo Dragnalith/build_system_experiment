@@ -13,6 +13,14 @@
 # for the particular platform. It depends on one OS, but may contain several distribution for 
 # different CPU and different toolchain.
 #
+# About OS:
+# I am considering three OS, 'win', 'mac', 'console1', 'console2'. The 'console1' and 'console2'
+# are here to simulate console vendor system. Since this project is a personal project, and
+# do not have access to real console vendor toolchain and sdk (as Playstation, Xbox, or Nintendo Switch).
+# I will reuse local toolchain to build for these "mock" OSes:
+# - On host "mac": 'console1' will use clang and 'console2' will use 'gcc'
+# - On host "win": 'console1' will use msvc_x86 toolchain and 'console2' will use 'msvc_x64'
+#
 
 if (target_os == "") {
   target_os = host_os
@@ -33,10 +41,16 @@ if (current_os == "") {
 
 os_is_mac = false
 os_is_win = false
+os_is_console1 = false
+os_is_console2 = false
 if (current_os == "mac") {
   os_is_mac = true
 } else if (current_os == "win") {
   os_is_win = true
+} else if (current_os == "console1") {
+  os_is_console1 = true
+} else if (current_os == "console2") {
+  os_is_console2 = true
 } else {
   print("current_os=${current_os}")
   assert(false)
@@ -56,15 +70,41 @@ if (current_cpu == "x64") {
 platform_is_mac = false
 platform_is_win_x64 = false
 platform_is_win_x86 = false
+platform_is_console1 = false
+platform_is_console2 = false
+platform_name_mac = "Mac"
+platform_name_win_x64 = "Win64"
+platform_name_win_x86 = "Win86"
+platform_name_console1 = "Console1"
+platform_name_console2 = "Console2"
+platform_id_mac = "mac"
+platform_id_win_x64 = "win_x64"
+platform_id_win_x86 = "win_x86"
+platform_id_console1 = "console1"
+platform_id_console2 = "console2"
 
 if (os_is_mac) {
   platform_is_mac = true
+  platform_name = platform_name_mac
+  platform_id = platform_id_mac
 } else if (os_is_win && cpu_is_x64) {
   platform_is_win_x64 = true
+  platform_name = platform_name_win_x64
+  platform_id = platform_id_win_x64
 } else if (os_is_win && cpu_is_x86) {
   platform_is_win_x86 = true
+  platform_name = platform_name_win_x86
+  platform_id = platform_id_win_x86
+} else if (os_is_console1) {
+  platform_is_console1 = true
+  platform_name = platform_name_console1
+  platform_id = platform_id_console1
+} else if (os_is_console2) {
+  platform_is_console2 = true
+  platform_name = platform_name_console2
+  platform_id = platform_id_console2
 }
-assert(platform_is_mac || platform_is_win_x64 || platform_is_win_x86)
+assert(platform_is_mac || platform_is_win_x64 || platform_is_win_x86 || platform_is_console1 || platform_is_console2)
 
 ################
 # Host Platform
@@ -77,7 +117,7 @@ if (host_os == "mac") {
 } else if (host_os == "win") {
   host_os_is_win = true
 } else {
-  print("host_os=${host_os}")
+  print("unsupported host_os: ${host_os}")
   assert(false)
 }
 
@@ -88,41 +128,74 @@ if (host_cpu == "x64") {
 } else if (host_cpu == "x86") {
   host_cpu_is_x86 = true
 } else {
-  print("host_cpu=${host_cpu}")
+  print("unsupported host_cpu: ${host_cpu}")
   assert(false)
 }
 
 host_platform_is_mac = false
 host_platform_is_win_x64 = false
-host_platform_is_win_x86 = false
 
-if (os_is_mac) {
+if (host_os_is_mac) {
   host_platform_is_mac = true
-} else if (os_is_win && cpu_is_x64) {
+  host_platform_name = platform_name_mac
+} else if (host_os_is_win && host_cpu_is_x64) {
   host_platform_is_win_x64 = true
-} else if (os_is_win && cpu_is_x86) {
-  host_platform_is_win_x86 = true
+  host_platform_name = platform_name_win_x64
+} else {
+  print("unsupported platform: host_os=${host_os} host_cpu=${host_cpu}")
+  assert(false)
 }
-assert(host_platform_is_mac || host_platform_is_win_x64 || host_platform_is_win_x86)
+assert(host_platform_is_mac || host_platform_is_win_x64)
 
 #############
 # Toolchains
 #############
 
-if (host_os_is_mac) {
-  toolchain_mac_clang = "//build/gn/platform/mac:clang"
-  toolchain_mac_gcc = "//build/gn/platform/mac:gcc"
-} else if (host_os_is_win) {
-  toolchain_win_x64_msvc = "//build/gn/platform/win_x64:msvc"
-  toolchain_win_x86_msvc = "//build/gn/platform/win_x86:msvc"
+# List all the toolchain available for the current host
+if (host_platform_is_mac) {
+  toolchain_mac_clang = "//build/gn/platform/mac:mac_clang"
+  toolchain_mac_gcc = "//build/gn/platform/mac:mac_gcc"
+  toolchain_console1 = "//build/gn/platform/console1:console1_clang"
+  toolchain_console2 = "//build/gn/platform/console2:console2_gcc"
+} else if (host_platform_is_win_x64) {
+  toolchain_win_x64_msvc = "//build/gn/platform/win_x64:win_x64_msvc_x64"
+  toolchain_win_x86_msvc = "//build/gn/platform/win_x86:win_x86_msvc_x86"
+  toolchain_console1 = "//build/gn/platform/console1:console1_msvc_x86"
+  toolchain_console2 = "//build/gn/platform/console2:console2_msvc_x64"
 }
 
+# Set default toolchain per platform
+if (host_platform_is_mac) {
+  toolchain_mac = toolchain_mac_clang
+
+  runtime_toolchains = [
+    toolchain_mac,
+    toolchain_console1,
+    toolchain_console2,
+  ]
+} else if (host_platform_is_win_x64) {
+  toolchain_win_x64 = toolchain_win_x64_msvc
+  toolchain_win_x86 = toolchain_win_x86_msvc
+
+  runtime_toolchains = [
+    toolchain_win_x64,
+    toolchain_win_x86,
+    toolchain_console1,
+    toolchain_console2,
+  ]
+}
+
+# Set default toolchain
 if (platform_is_mac) {
-  set_default_toolchain("$toolchain_mac_clang")
+  set_default_toolchain("$toolchain_mac")
 } else if (platform_is_win_x64) {
-  set_default_toolchain("$toolchain_win_x64_msvc")
+  set_default_toolchain("$toolchain_win_x64")
 } else if (platform_is_win_x86) {
-  set_default_toolchain("$toolchain_win_x86_msvc")
+  set_default_toolchain("$toolchain_win_x86")
+} else if (platform_is_console1) {
+  set_default_toolchain("$toolchain_console1")
+} else if (platform_is_console2) {
+  set_default_toolchain("$toolchain_console2")
 }
 
 ########################

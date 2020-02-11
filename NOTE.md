@@ -29,6 +29,6 @@ Conclusion: SDK configuration depend on the platform and the toolchain, even if 
 - Toolchains are defined during the first configuration path (the one using the default toolchain), so when defining a toolchain, 'current_cpu' value is not the cpu value of the toolchain being defined but is the value of the default toolchain cpu.
 # 11 Fev 2020
 - For one build configuration several platform needs to be taken into account. The host platform is the platform target for buildtool and tools. buildtools are application used during the build, tool are game tools (asset editors, asset compiler, asset build system, ...). The runtime platforms are platform targets for the game runtime. There is only one host platform, but several runtime platforms for one build configuration.
-- Is is possible to use a variable inside a variable name in string expansion "${variable_${sub_var_name}}"?
+- Is is possible to use a variable inside a variable name in string expansion "${variable_${sub_var_name}}"? No it does not work
 - In order to build runtime target for multiple toolchain, I have a global "runtime_toolchains" which list all the toolchains you what runtime to be built for. I am iterating on the toolchain in the //src/runtime config only once.
 - I have been able to specify a build output per target type (e.g buildtool, runtime, tool, ...) by creating custom target to override default one. Now there are runtime_executable, tool_executable, ... those enforce the default value of output_dir

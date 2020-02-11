@@ -1,15 +1,7 @@
-group("runtime") {
+group("default") {
   deps = [
     "//src/hello_world",
-    "//src/runtime/runtime_app"
+    "//src/tool",
+    "//src/runtime",
   ]
-}
-
-group("default") {
-  deps = []
-  foreach(t, runtime_toolchains) {
-      deps += [
-        "//:runtime($t)"
-      ]
-  }
 }

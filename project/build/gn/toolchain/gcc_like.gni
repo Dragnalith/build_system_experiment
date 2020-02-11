@@ -26,8 +26,9 @@ template("gcc_like_toolchain") {
       command = "rm -f {{output}} && ${invoker.ar} rcs {{output}} {{inputs}}"
       description = "AR {{output}}"
       outputs = [
-        "{{target_out_dir}}/{{target_output_name}}{{output_extension}}",
+        "{{output_dir}}/{{target_output_name}}{{output_extension}}",
       ]
+      default_output_dir = "out/${invoker.toolchain_id}/lib"
       default_output_extension = ".a"
       output_prefix = "lib"
     }

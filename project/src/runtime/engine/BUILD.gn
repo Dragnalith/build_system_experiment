@@ -1,10 +1,12 @@
+import("//build/gn/target/runtime.gni")
+
 config("engine_config") {
   include_dirs = [
       "include"
   ]
 }
 
-static_library("engine") {
+runtime_library("engine") {
   sources = [
     "src/Engine.cpp",
   ]

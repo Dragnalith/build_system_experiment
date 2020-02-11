@@ -214,3 +214,5 @@ set_defaults("static_library") {
     "//build/gn/config:default_cpp"
   ]
 }
+
+default_out_dir = "/out"

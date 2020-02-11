@@ -1,0 +1,13 @@
+template("tool_executable") {
+  executable(target_name) {
+    output_dir = "${root_build_dir}${default_out_dir}/tool/bin"
+    forward_variables_from(invoker, "*")
+  }
+}
+
+template("tool_library") {
+  static_library(target_name) {
+    output_dir = "${root_build_dir}${default_out_dir}/tool/bin"
+    forward_variables_from(invoker, "*")
+  }
+}

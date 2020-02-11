@@ -1,4 +1,6 @@
-executable("asset_converter") {
+import("//build/gn/target/tool.gni")
+
+tool_executable("asset_converter") {
   sources = [
     "src/main.cpp",
   ]

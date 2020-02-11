@@ -1,0 +1,13 @@
+template("runtime_executable") {
+  executable(target_name) {
+    output_dir = "${root_build_dir}${default_out_dir}/runtime/${platform_name}/bin"
+    forward_variables_from(invoker, "*")
+  }
+}
+
+template("runtime_library") {
+  static_library(target_name) {
+    output_dir = "${root_build_dir}${default_out_dir}/runtime/${platform_name}/lib"
+    forward_variables_from(invoker, "*")
+  }
+}

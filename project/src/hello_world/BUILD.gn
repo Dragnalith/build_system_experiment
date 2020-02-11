@@ -1,4 +1,6 @@
-executable("hello_world") {
+import("//build/gn/target/buildtool.gni")
+
+buildtool_executable("hello_world") {
   sources = [
     "main.cpp",
   ]

@@ -47,8 +47,9 @@ template("msvc_toolchain") {
       command = "$ninja -t msvc -e $env -- lib.exe /nologo /OUT:{{output}} @$rspfile"
       description = "LIB {{output}}"
       outputs = [
-        "{{target_out_dir}}/{{target_output_name}}{{output_extension}}",
+        "{{output_dir}}/{{target_output_name}}{{output_extension}}",
       ]
+      default_output_dir = "out/${target_name}/lib"
       default_output_extension = ".lib"
 
       rspfile_content = "{{inputs_newline}}"

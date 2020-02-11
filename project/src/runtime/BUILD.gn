@@ -1,0 +1,17 @@
+# list of all runtime targets
+group("runtime_target") {
+    deps = [
+        "engine",
+        "runtime_app",
+    ]
+}
+
+# compile runtime target for every toolchains
+group("runtime") {
+  deps = []
+  foreach(t, runtime_toolchains) {
+      deps += [
+        ":runtime_target($t)"
+      ]
+  }
+}

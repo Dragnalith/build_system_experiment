@@ -1,0 +1,5 @@
+group("tool"){
+    deps = [
+        "asset_converter",
+    ]
+}

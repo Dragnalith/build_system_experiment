@@ -1,4 +1,6 @@
-executable("runtime_app") {
+import("//build/gn/target/runtime.gni")
+
+runtime_executable("runtime_app") {
   sources = [
     "src/main.cpp",
   ]

@@ -9,8 +9,9 @@ simulate several platform
 - [x] Build static lib on Windows
 - [x] Make toolchain include_dir and lib_path being defined in a default config instead of hardcoded
 - [x] Improve the way we build for multiple platform at the same time
-- [ ] Tool and runtime target should not be outputed on the same folder
+- [x] Tool and runtime target should not be outputed on the same folder
 - [ ] Make possible to specifiy Visual Studio version and WinSDK version
+- [ ] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
 - [ ] Build a C++ tool which is used to generate .cpp file used in the build
 - [ ] Build tool which simulate different asset generation for different platform
 - [ ] Research Visual Studio integration

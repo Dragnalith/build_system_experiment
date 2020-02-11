@@ -12,7 +12,10 @@ Setup winsdk variable for gn
 """
 
 def main():
-    winsdk_config = winsdk.get_latest_config()
+    if len(sys.argv) > 1:
+        winsdk_config = winsdk.get_config(sys.argv[1])
+    else:
+        winsdk_config = winsdk.get_latest_config()
 
     print('include = {}'.format(util.convert_to_gn_str(winsdk_config.include_path)))
     print('lib = {}'.format(util.convert_to_gn_str(winsdk_config.lib_path)))

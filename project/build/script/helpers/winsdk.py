@@ -15,8 +15,8 @@ class WinSdkConfig:
         self.include_path.resolve()
         self.lib_path.resolve()
 
-        assert(self.include_path.exists())
-        assert(self.lib_path.exists())
+        if not self.include_path.exists() or not self.lib_path.exists():
+            raise Exception("WinSDK version '{}' has not been found".format(version))
 
     def __str__(self):
         result = 'WinSDK Config version: {}\n'.format(self.version)
@@ -65,6 +65,9 @@ def get_latest_version():
 
 def get_latest_config():
     return WinSdkConfig(get_latest_version())
+
+def get_config(version):
+    return WinSdkConfig(version)
 
 def test_print():
     print(get_latest_config())

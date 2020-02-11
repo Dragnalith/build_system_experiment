@@ -9,7 +9,7 @@ template("msvc_toolchain") {
   # it is not possible to re-use msvc from //build/gn/config/msvc_config.gni
   # because it is the value for the current_cpu, where here we want the value for 
   # the invoker.cpu
-  msvc = exec_script("//build/script/find_msvc.py", [ "2017", invoker.cpu, ], "scope")
+  msvc = exec_script("//build/script/find_msvc.py", [ visual_studio_version, invoker.cpu, ], "scope")
   exec_script("//build/script/setup_msvc_environment.py", [ msvc.bin, env_path,], "scope")
 
   toolchain(target_name) {
@@ -17,8 +17,8 @@ template("msvc_toolchain") {
     lib_dir_switch = "/LIBPATH:" # build-in variable: How libraries directory should be expanded
 
     tool("cxx") {
-      rspfile = "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.rsp"
-      pdbname = "{{target_out_dir}}/{{target_output_name}}.{{source_name_part}}.pdb"
+      rspfile = "{{output}}.rsp"
+      pdbname = "{{output}}.pdb"
       command = "$ninja -t msvc -e $env -- cl.exe /nologo /EHsc /showIncludes /FC @$rspfile /c {{source}} /Fo{{output}} /Fd$pdbname"
       depsformat = "msvc"
       description = "CXX {{output}}"

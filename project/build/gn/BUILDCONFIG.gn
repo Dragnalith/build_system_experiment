@@ -202,6 +202,11 @@ if (platform_is_mac) {
 # Default Configuration
 ########################
 
+if (host_os_is_win) {
+  declare_args() {
+    visual_studio_version = "2017"
+  }
+}
 set_defaults("executable") {
   configs = [
     "//build/gn/config:default_cpp"

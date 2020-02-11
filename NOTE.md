@@ -32,3 +32,4 @@ Conclusion: SDK configuration depend on the platform and the toolchain, even if 
 - Is is possible to use a variable inside a variable name in string expansion "${variable_${sub_var_name}}"? No it does not work
 - In order to build runtime target for multiple toolchain, I have a global "runtime_toolchains" which list all the toolchains you what runtime to be built for. I am iterating on the toolchain in the //src/runtime config only once.
 - I have been able to specify a build output per target type (e.g buildtool, runtime, tool, ...) by creating custom target to override default one. Now there are runtime_executable, tool_executable, ... those enforce the default value of output_dir
+- It is now possible to specify the version of visual studio (2017, 2019) and the version of the windows sdk you want to use.

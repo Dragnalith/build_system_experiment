@@ -15,7 +15,7 @@ template("gcc_like_toolchain") {
         rspfile = "$outfile.rsp"
         command = "${invoker.cxx} {{ldflags}} -o {{output}} @$rspfile {{solibs}} {{libs}}"
         description = "LINK {{label}}"
-        default_output_dir = "out/${invoker.toolchain_id}/bin"
+        default_output_dir = "out/${target_name}/bin"
         rspfile_content = "{{inputs}}"
         outputs = [
         outfile

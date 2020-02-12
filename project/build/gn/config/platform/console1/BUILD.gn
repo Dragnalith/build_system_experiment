@@ -7,6 +7,12 @@ if (host_os_is_win) {
 
     msvc_config("msvc") {
     }
+
+    config("debug") {
+      configs = [
+        "//build/gn/config/win:debug"
+      ]
+    }
 }
 
 config("default") {
@@ -23,7 +29,5 @@ config("default") {
 }
 
 config("debug") {
-  configs = [
-    "//build/gn/config/win:debug"
-  ]
+  
 }

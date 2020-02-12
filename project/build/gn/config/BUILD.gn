@@ -1,5 +1,6 @@
 config("default_cpp") {
     configs = [
-      "//build/gn/config/platform/$platform_id",
+      "//build/gn/config/platform/$platform_id:default",
+      "//build/gn/config/platform/$platform_id:debug",
     ]
 }

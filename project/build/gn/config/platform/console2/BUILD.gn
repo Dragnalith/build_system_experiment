@@ -9,7 +9,7 @@ if (host_os_is_win) {
     }
 }
 
-config("console2") {
+config("default") {
   configs = []
   if (host_os_is_win) {
     configs += [
@@ -22,3 +22,8 @@ config("console2") {
   ]
 }
 
+config("debug") {
+  configs = [
+    "//build/gn/config/win:debug"
+  ]
+}

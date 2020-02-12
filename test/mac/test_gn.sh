@@ -16,7 +16,7 @@ set -e
 pushd $(dirname $0)
 
 rm -rf ../../out/build-gn
-../../bin/mac/gn --root=../../project -q gen ../../out/build-gn
+../../bin/mac/gn --root=../../project -q gen ../../out/build-gn --ide=xcode
 ../../bin/mac/ninja -C ../../out/build-gn
 
 popd

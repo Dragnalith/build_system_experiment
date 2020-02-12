@@ -1,5 +1,6 @@
 group("default") {
   deps = [
+    "//src/buildtool",
     "//src/hello_world",
     "//src/tool",
     "//src/runtime",

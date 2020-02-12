@@ -12,9 +12,12 @@ simulate several platform
 - [x] Tool and runtime target should not be outputed on the same folder
 - [x] Make possible to specifiy Visual Studio version and WinSDK version
 - [x] Is it possible to do "${variable_${sub_var_name}}"?
+- [x] Enable debug info on Windows
+- [x] Generate Visual Studio solution on Windows
 - [ ] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
 - [ ] Build a C++ tool which is used to generate .cpp file used in the build
 - [ ] Build tool which simulate different asset generation for different platform
+- [ ] specify the path to ninja when generating visual studio project
 - [ ] Research Visual Studio integration
 - [ ] Research C# integration
 - [ ] Research Incredibuild integration with ninja

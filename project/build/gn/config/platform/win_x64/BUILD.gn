@@ -7,7 +7,7 @@ winsdk_config("winsdk") {
 msvc_config("msvc") {
 }
 
-config("win_x64") {
+config("default") {
   configs = [
     ":winsdk",
     ":msvc",
@@ -17,3 +17,8 @@ config("win_x64") {
   ]
 }
 
+config("debug") {
+  configs = [
+    "//build/gn/config/win:debug"
+  ]
+}

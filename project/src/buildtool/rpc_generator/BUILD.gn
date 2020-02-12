@@ -1,0 +1,9 @@
+import("//build/gn/target/buildtool.gni")
+
+buildtool_executable("rpc_generator") {
+  sources = [
+    "src/generator.h",
+    "src/generator.cpp",
+    "src/main.cpp",
+  ]
+}

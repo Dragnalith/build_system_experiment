@@ -1,5 +1,7 @@
 #pragma once
 
+// Platform Config
+
 #ifndef DRGN_PLATFORM_IS_MAC
 #define DRGN_PLATFORM_IS_MAC 0
 #endif

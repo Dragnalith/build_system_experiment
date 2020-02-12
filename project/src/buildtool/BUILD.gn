@@ -1,0 +1,5 @@
+group("buildtool"){
+    deps = [
+        "rpc_generator",
+    ]
+}

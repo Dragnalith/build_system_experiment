@@ -1,0 +1,11 @@
+config("debug") {
+  cflags = [
+      "/DEBUG",
+      "/ZI"
+  ]
+  ldflags = [
+      "/DEBUG",
+      "/OPT:NOICF",
+      "/OPT:NOREF",
+  ]
+}

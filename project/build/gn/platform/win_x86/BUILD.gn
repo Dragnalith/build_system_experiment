@@ -1,6 +1,6 @@
 import("//build/gn/toolchain/msvc.gni")
 
-msvc_toolchain("win_x86_msvc_x86") {
+msvc_toolchain(platform_toolchain_name_win_x86) {
   os = "win"
   cpu = "x86"
 }

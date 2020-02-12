@@ -8,6 +8,9 @@ config("engine_config") {
 
 runtime_library("engine") {
   sources = [
+    "include/drgn/Config.h",
+    "include/drgn/Engine.h",
+    "src/Config.cpp",
     "src/Engine.cpp",
   ]
   all_dependent_configs = [

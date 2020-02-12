@@ -21,3 +21,12 @@
 #ifndef DRGN_PLATFORM_IS_CONSOLE2
 #define DRGN_PLATFORM_IS_CONSOLE2 0
 #endif
+
+namespace drgn {
+
+struct Config {
+};
+
+Config getConfig();
+
+}

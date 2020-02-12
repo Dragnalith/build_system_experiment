@@ -2,6 +2,9 @@ config("default") {
   defines = [
       "DRGN_PLATFORM_IS_MAC=1"
   ]
+  cflags = [
+    "-std=c++17"
+  ]
 }
 
 config("debug") {

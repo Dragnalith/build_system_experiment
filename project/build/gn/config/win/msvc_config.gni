@@ -21,6 +21,9 @@ template("msvc_config") {
     lib_dirs = [
       "/${msvc.lib}",
     ]
+    cflags = [
+      "/std:c++17"
+    ]
   }
 }
 

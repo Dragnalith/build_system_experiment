@@ -1,0 +1,8 @@
+# define a service with service keyword
+
+include include/data_type.schema
+
+data input
+
+service calculator
+service computer

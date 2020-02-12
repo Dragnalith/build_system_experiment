@@ -1,6 +1,5 @@
 TODO:
-- [x] Setup compilation of the same program with different toolchain to
-simulate several platform
+- [x] Setup compilation of the same program with different toolchain to simulate several platform
 - [x] Build with bash script on OS X
 - [x] Build with ninja on OS X
 - [x] Build with gn on OS X
@@ -14,10 +13,12 @@ simulate several platform
 - [x] Is it possible to do "${variable_${sub_var_name}}"?
 - [x] Enable debug info on Windows
 - [x] Generate Visual Studio solution on Windows
-- [ ] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
-- [ ] Build a C++ tool which is used to generate .cpp file used in the build
+- [x] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
+- [x] Build a C++ tool which is used to generate .cpp file used in the build
+- [x] Integrate the code generator describe above with
 - [ ] Build tool which simulate different asset generation for different platform
 - [ ] specify the path to ninja when generating visual studio project
+- [ ] Integrate with test
 - [ ] Research Visual Studio integration
 - [ ] Research C# integration
 - [ ] Research Incredibuild integration with ninja

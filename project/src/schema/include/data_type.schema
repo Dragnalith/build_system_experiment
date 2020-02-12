@@ -1,0 +1,7 @@
+# some comments
+
+include vector_type.schema
+
+data scene
+data object
+data component

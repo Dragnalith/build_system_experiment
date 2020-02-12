@@ -1,0 +1,7 @@
+# define some assets
+
+include include/data_type.schema
+
+data texture
+data material
+data mesh

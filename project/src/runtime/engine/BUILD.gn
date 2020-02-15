@@ -16,4 +16,7 @@ runtime_library("engine") {
   all_dependent_configs = [
     ":engine_config"
   ]
+  deps = [
+    "//src/schema:calculator_service",
+  ]
 }

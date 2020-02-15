@@ -1,0 +1,9 @@
+import("//src/buildtool/rpc_generator/rpc_generator.gni")
+
+compile_schema("calculator_service") {
+    sources = [
+        "calculator_service.schema"
+    ]
+    output_path = "drgn/generated"
+    is_service = true
+}

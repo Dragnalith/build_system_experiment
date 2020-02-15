@@ -22,18 +22,6 @@
 # - On host "win": 'console1' will use msvc_x86 toolchain and 'console2' will use 'msvc_x64'
 #
 
-###########
-# Globals
-###########
-
-binary_folder_name = "bin"
-library_folder_name = "lib"
-output_relative_path = "/out"
-buildtool_relative_path = output_relative_path + "/buildtool"
-runtime_relative_path = output_relative_path + "/runtime"
-tool_relative_path = output_relative_path + "/tool"
-buildtool_binary_relative_path = buildtool_relative_path + "/" + binary_folder_name
-
 if (target_os == "") {
   target_os = host_os
 }
@@ -235,3 +223,23 @@ set_defaults("static_library") {
     "//build/gn/config:default_cpp"
   ]
 }
+
+
+###########
+# Globals
+###########
+
+binary_folder_name = "bin"
+library_folder_name = "lib"
+output_relative_path = "out"
+buildtool_relative_path = output_relative_path + "/buildtool"
+runtime_relative_path = output_relative_path + "/runtime"
+tool_relative_path = output_relative_path + "/tool"
+buildtool_binary_relative_path = buildtool_relative_path + "/" + binary_folder_name
+buildtool_library_relative_path = buildtool_relative_path + "/" + library_folder_name
+runtime_binary_relative_path = runtime_relative_path + "/${platform_name}/" + binary_folder_name
+runtime_library_relative_path = runtime_relative_path + "/${platform_name}/" + library_folder_name
+tool_binary_relative_path = tool_relative_path + "/" + binary_folder_name
+tool_library_relative_path = tool_relative_path + "/" + library_folder_name
+
+generated_file_folder_relative_path = "generated_files"

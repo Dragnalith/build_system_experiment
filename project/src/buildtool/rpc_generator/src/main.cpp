@@ -160,6 +160,9 @@ void parse_source(std::filesystem::path input, Context& context, bool is_include
 	}
 }
 
+//
+// command:
+//     rpc_generator.exe --generate_service --depfile <depfile> --output_dir <output directory> input1 [input2 ...]
 int main(int argc, char** argv) {
 	Config config = parse_arg(argc, argv);
 
@@ -214,7 +217,7 @@ int main(int argc, char** argv) {
 
 	if (config.depfile.string().size() > 0) {
 		std::ofstream file(config.depfile.c_str());
-		assert(file.is_open() && "data_header_output cannot be open");
+		assert(file.is_open() && "depfile cannot be open");
 
 		for (auto& context : context_pool) {
 			if (context.includes.size() > 0) {

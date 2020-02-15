@@ -15,8 +15,10 @@ TODO:
 - [x] Generate Visual Studio solution on Windows
 - [x] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
 - [x] Build a C++ tool which is used to generate .cpp file used in the build
-- [ ] Integrate the code generator describe above with
+- [x] Integrate the code generator describe above with
+- [ ] Make C++ executable being able to depend on rpc generated code
 - [ ] Build tool which simulate different asset generation for different platform
+- [ ] Integrate the asset build tool above, and make sure about data dependencies
 - [ ] specify the path to ninja when generating visual studio project
 - [ ] Integrate with test
 - [ ] Research C# integration
@@ -24,3 +26,7 @@ TODO:
 - [ ] Integrate rpc_generator with C#
 - [ ] Research Incredibuild integration with ninja
 - [ ] Build with fastbuild on OS X
+- [ ] DEMO: show you can change build flag and recompile (for instance tool debug, runtime release)
+- [ ] DEMO: preset with default Debug, Optimized, Release config
+- [ ] DEMO: show we can multiple build folder for multiple build configuration at the same time
+- [ ] DEMO: Show incremental build which works for assets and generated files

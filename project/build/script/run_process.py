@@ -14,9 +14,16 @@ def main():
 
     command = [str(x) for x in sys.argv[1:]]
 
-    print("run_processy.py: Run the following command '{}'".format(' '.join(command)))
+    # NOTE: Do not forget check=True, otherwise the python script will succeed even if the underlying
+    # has failed
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
 
-    subprocess.run(command)
+    sys.stdout.write(stdout.decode())
+    sys.stderr.write(stderr.decode())
+
+    if (process.returncode != 0):
+        raise Exception("run_process.py error: Process exit code is {}, it is not zero".format(process.returncode))
 
 if __name__ == '__main__':
     main()

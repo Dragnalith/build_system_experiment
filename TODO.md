@@ -10,7 +10,7 @@ TODO:
 - [x] Improve the way we build for multiple platform at the same time
 - [x] Tool and runtime target should not be outputed on the same folder
 - [x] Make possible to specifiy Visual Studio version and WinSDK version
-- [x] Is it possible to do "${variable_${sub_var_name}}"?
+- [x] Is it possible to do "${variable_${sub_var_name}}"? No
 - [x] Enable debug info on Windows
 - [x] Generate Visual Studio solution on Windows
 - [x] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
@@ -19,8 +19,8 @@ TODO:
 - [ ] Build tool which simulate different asset generation for different platform
 - [ ] specify the path to ninja when generating visual studio project
 - [ ] Integrate with test
-- [ ] Research Visual Studio integration
 - [ ] Research C# integration
+- [ ] Research Visual Studio integration
 - [ ] Integrate rpc_generator with C#
 - [ ] Research Incredibuild integration with ninja
 - [ ] Build with fastbuild on OS X

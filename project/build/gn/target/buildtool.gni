@@ -1,13 +1,15 @@
+assert(host_platform_id == platform_id)
+
 template("buildtool_executable") {
   executable(target_name) {
-    output_dir = "${root_build_dir}${default_out_dir}/buildtool/bin"
+    output_dir = "${root_build_dir}${buildtool_relative_path}/${binary_folder_name}"
     forward_variables_from(invoker, "*")
   }
 }
 
 template("buildtool_library") {
   static_library(target_name) {
-    output_dir = "${root_build_dir}${default_out_dir}/buildtool/lib"
+    output_dir = "${root_build_dir}${buildtool_relative_path}/${library_folder_name}"
     forward_variables_from(invoker, "*")
   }
 }

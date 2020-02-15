@@ -22,6 +22,18 @@
 # - On host "win": 'console1' will use msvc_x86 toolchain and 'console2' will use 'msvc_x64'
 #
 
+###########
+# Globals
+###########
+
+binary_folder_name = "bin"
+library_folder_name = "lib"
+output_relative_path = "/out"
+buildtool_relative_path = output_relative_path + "/buildtool"
+runtime_relative_path = output_relative_path + "/runtime"
+tool_relative_path = output_relative_path + "/tool"
+buildtool_binary_relative_path = buildtool_relative_path + "/" + binary_folder_name
+
 if (target_os == "") {
   target_os = host_os
 }
@@ -143,9 +155,11 @@ host_platform_is_win_x64 = false
 if (host_os_is_mac) {
   host_platform_is_mac = true
   host_platform_name = platform_name_mac
+  host_platform_id = platform_id_mac
 } else if (host_os_is_win && host_cpu_is_x64) {
   host_platform_is_win_x64 = true
   host_platform_name = platform_name_win_x64
+  host_platform_id = platform_id_win_x64
 } else {
   print("unsupported platform: host_os=${host_os} host_cpu=${host_cpu}")
   assert(false)
@@ -221,5 +235,3 @@ set_defaults("static_library") {
     "//build/gn/config:default_cpp"
   ]
 }
-
-default_out_dir = "/out"

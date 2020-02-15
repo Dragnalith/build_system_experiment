@@ -1,7 +1,4 @@
 """
-Run the process given on the command line.
-
-NOTE: This script is required because GN cannot process, only python script
 """
 
 import sys

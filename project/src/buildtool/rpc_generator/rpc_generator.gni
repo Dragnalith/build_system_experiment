@@ -1,4 +1,4 @@
-rpc_generator_path = "${buildtool_binary_relative_path}/rpc_generator.exe"
+rpc_generator_path = "${buildtool_binary_relative_path}/rpc_generator"
 output_root_dir = generated_file_folder_relative_path + "/rpc_generator"
 
 # Run the following command:

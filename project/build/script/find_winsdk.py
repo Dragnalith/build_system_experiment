@@ -1,3 +1,7 @@
+"""
+Setup winsdk variable for gn
+"""
+
 import sys
 import os
 import pathlib
@@ -6,10 +10,6 @@ import helpers.environment as env
 import helpers.utility as util
 import helpers.winsdk as winsdk
 import helpers.vstudio as vstudio
-
-"""
-Setup winsdk variable for gn
-"""
 
 def main():
     if len(sys.argv) > 1:

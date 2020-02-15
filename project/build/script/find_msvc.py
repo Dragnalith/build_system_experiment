@@ -2,13 +2,13 @@ import sys
 import os
 import pathlib
 
-import helpers.utility as util
-import helpers.vstudio as vstudio
-
 """
 Create environment file to be used with 'ninja -t msvc -e {env}'
 and setup some toolchain variable for gn
 """
+
+import helpers.utility as util
+import helpers.vstudio as vstudio
 
 def main():
     if len(sys.argv) != 3:

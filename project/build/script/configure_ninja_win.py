@@ -1,15 +1,15 @@
-import os
-import helpers.environment as env
-import helpers.utility as util
-import helpers.winsdk as winsdk
-import helpers.vstudio as vstudio
-
 """
 Configure the build for the raw ninja file under build/gn/ninja/win/build.ninja
 
 In short it finds MSVC and Windows SDK and generate data to be used by ninja during
 the build
 """
+
+import os
+import helpers.environment as env
+import helpers.utility as util
+import helpers.winsdk as winsdk
+import helpers.vstudio as vstudio
 
 build_dir = env.path.root / 'out/build-ninja'
 env_x64 = build_dir / 'env.x64'

@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <stdint.h>
 #include <assert.h>
 

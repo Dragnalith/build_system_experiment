@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <string>
+#include <vector>
 #include <cmath>
 #include <stdint.h>
 #include <assert.h>

@@ -1,0 +1,7 @@
+import("//build/gn/target/tool.gni")
+
+tool_executable("shader_compiler") {
+  sources = [
+    "main.cpp",
+  ]
+}

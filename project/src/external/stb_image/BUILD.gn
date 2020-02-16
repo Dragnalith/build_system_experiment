@@ -1,0 +1,19 @@
+import("//build/gn/target/tool.gni")
+
+config("stb_image_config") {
+  include_dirs = [
+      "include"
+  ]
+}
+
+tool_library("stb_image") {
+  sources = [
+    "include/stb_image.h",
+    "include/stb_image_write.h",
+    "src/stb_image.cpp",
+    "src/stb_image_write.cpp",
+  ]
+  public_configs = [
+    ":stb_image_config"
+  ]
+}

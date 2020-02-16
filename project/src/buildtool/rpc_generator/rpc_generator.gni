@@ -1,18 +1,19 @@
 rpc_generator_path = "${buildtool_binary_relative_path}/rpc_generator"
-output_root_dir = generated_file_folder_relative_path + "/rpc_generator"
+output_root_dir = "${root_build_dir}/${generated_file_folder_relative_path}/rpc_generator"
 
 # Run the following command:
 #     rpc_generator.exe --generate_service --depfile <depfile> --output_dir <output directory> input1 [input2 ...]
 #
 # The command will be run with the build directory as working directory
 template("compile_schema") {
+  output_dir_absolute_path = "${output_root_dir}/${invoker.output_path}"
   action_foreach(target_name + "_impl") {
     assert(defined(invoker.sources), "Sources must be defined")
 
     script = "//build/script/run_process.py"
     sources = invoker.sources
-    output_dir = rebase_path("${root_build_dir}/${output_root_dir}/${invoker.output_path}", root_build_dir)
-    depfile = "${root_build_dir}/${output_dir}/{{source_file_part}}.d"
+    output_dir = rebase_path(output_dir_absolute_path, root_build_dir)
+    depfile = "${root_build_dir}/${output_dir}/{{source_name_part}}.d"
     args = [
       rpc_generator_path,
     ]
@@ -29,18 +30,28 @@ template("compile_schema") {
       "{{source}}"
     ]
     outputs = [ 
-        "${root_build_dir}/${output_dir}/{{source_file_part}}.h",
-        "${root_build_dir}/${output_dir}/{{source_file_part}}_service.h" ,
-        "${root_build_dir}/${output_dir}/{{source_file_part}}_service.cpp",
+        "${root_build_dir}/${output_dir}/{{source_name_part}}.h",
+        "${root_build_dir}/${output_dir}/{{source_name_part}}.service.h" ,
+        "${root_build_dir}/${output_dir}/{{source_name_part}}.service.cpp",
     ]
     deps = [
       "//src/buildtool/rpc_generator"
     ]
   }
 
-  group(target_name) {
+  config(target_name + "_config") {
+    include_dirs = [
+      output_root_dir
+    ]
+  }
+
+  source_set(target_name) {
+    sources = get_target_outputs(":${target_name}_impl")
     deps = [
       ":${target_name}_impl(${default_toolchain})"
+    ]
+    public_configs = [
+      ":${target_name}_config"
     ]
   }
 }

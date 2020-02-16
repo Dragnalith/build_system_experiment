@@ -1,6 +1,8 @@
 #include <drgn/Engine.h>
 #include <drgn/Config.h>
 
+#include <drgn/generated/calculator.service.h>
+
 namespace drgn
 {
 
@@ -8,7 +10,11 @@ int getVersion() {
     return 2020;
 }
 const char* getName() {
-    return "DRGN-Engine";
+    return "DRGN Engine";
+}
+
+const char* getComputerServiceName() {
+    return computer::getName();
 }
 
 const char* getPlatformName() {

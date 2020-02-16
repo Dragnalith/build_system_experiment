@@ -1,0 +1,10 @@
+import("//build/gn/target/tool.gni")
+
+tool_executable("texture_converter") {
+  sources = [
+    "src/main.cpp",
+  ]
+  deps = [
+    "//src/external/stb_image",
+  ]
+}

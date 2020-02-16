@@ -1,9 +1,16 @@
 import("//src/buildtool/rpc_generator/rpc_generator.gni")
 
-compile_schema("calculator_service") {
+compile_schema("calculator") {
     sources = [
-        "calculator_service.schema"
+        "calculator.schema"
     ]
     output_path = "drgn/generated"
     is_service = true
+}
+
+compile_schema("assets") {
+    sources = [
+        "assets.schema"
+    ]
+    output_path = "drgn/generated"
 }

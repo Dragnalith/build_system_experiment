@@ -13,10 +13,10 @@ runtime_library("engine") {
     "src/Config.cpp",
     "src/Engine.cpp",
   ]
-  all_dependent_configs = [
+  public_configs = [
     ":engine_config"
   ]
   deps = [
-    "//src/schema:calculator_service",
+    "//src/schema:calculator",
   ]
 }

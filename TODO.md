@@ -16,10 +16,12 @@ TODO:
 - [x] Make possible to compile only 1 target, only buildtool, only tool, only runtime target for specific platform
 - [x] Build a C++ tool which is used to generate .cpp file used in the build
 - [x] Integrate the code generator describe above with
-- [ ] Make C++ executable being able to depend on rpc generated code
-- [ ] Build tool which simulate different asset generation for different platform
+- [x] Make generated file name not have the extension in their name
+- [x] Make C++ executable being able to depend on rpc generated code
+- [ ] Build tool which simulate different asset generation for different platform (shader, texture, copy)
 - [ ] Integrate the asset build tool above, and make sure about data dependencies
 - [ ] specify the path to ninja when generating visual studio project
+- [ ] Integrate external precompiled library
 - [ ] Integrate with test
 - [ ] Research C# integration
 - [ ] Research Visual Studio integration

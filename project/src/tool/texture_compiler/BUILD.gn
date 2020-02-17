@@ -1,6 +1,6 @@
 import("//build/gn/target/tool.gni")
 
-tool_executable("texture_converter") {
+tool_executable("texture_compiler") {
   sources = [
     "src/main.cpp",
   ]

@@ -1,0 +1,37 @@
+texture_compiler_path = "${tool_binary_relative_path}/texture_compiler"
+output_root_dir = "${root_build_dir}/${runtime_data_relative_path}"
+
+# Run the following command:
+#     texture_compiler.exe --platform PLATFORM -o OUPUT INPUT
+#
+# The command will be run with the build directory as working directory
+template("compile_one_texture") {
+  assert(defined(invoker.source), "'source' must be defined")
+  output_dir_absolute_path = "${output_root_dir}/${invoker.output_path}"
+  action(target_name) {
+    source_name = get_path_info(invoker.source, "name")
+    script = "//build/script/run_process.py"
+    sources = [
+        invoker.source
+    ]
+    output_dir = rebase_path("${output_dir_absolute_path}", root_build_dir)
+    output = "${output_dir}/${source_name}.bmp"
+    args = [
+      texture_compiler_path,
+    ]
+    args += [
+      "--platform",
+      platform_name,
+      "-o",
+      output,
+      rebase_path(invoker.source, root_build_dir),
+    ]
+    outputs = [ 
+        "${root_build_dir}/${output}",
+    ]
+    deps = [
+      "//src/tool/texture_compiler($default_toolchain)",
+    ]
+  }
+}
+

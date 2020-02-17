@@ -231,6 +231,7 @@ set_defaults("static_library") {
 
 binary_folder_name = "bin"
 library_folder_name = "lib"
+data_folder_name = "data"
 output_relative_path = "out"
 buildtool_relative_path = output_relative_path + "/buildtool"
 runtime_relative_path = output_relative_path + "/runtime"
@@ -239,6 +240,7 @@ buildtool_binary_relative_path = buildtool_relative_path + "/" + binary_folder_n
 buildtool_library_relative_path = buildtool_relative_path + "/" + library_folder_name
 runtime_binary_relative_path = runtime_relative_path + "/${platform_name}/" + binary_folder_name
 runtime_library_relative_path = runtime_relative_path + "/${platform_name}/" + library_folder_name
+runtime_data_relative_path = runtime_relative_path + "/${platform_name}/" + data_folder_name
 tool_binary_relative_path = tool_relative_path + "/" + binary_folder_name
 tool_library_relative_path = tool_relative_path + "/" + library_folder_name
 

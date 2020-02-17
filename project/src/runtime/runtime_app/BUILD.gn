@@ -7,4 +7,5 @@ runtime_executable("runtime_app") {
   deps = [
     "//src/runtime/engine"
   ]
+  data_deps = [ "//src/runtime:runtime_data" ]
 }

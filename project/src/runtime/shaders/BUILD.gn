@@ -1,0 +1,24 @@
+import("//src/tool/shader_compiler/shader_compiler.gni")
+
+compile_one_shader("default.hlsl") {
+    source = "default.hlsl"
+    output_path = "shaders"
+}
+
+compile_one_shader("system/system.hlsl") {
+    source = "system/system.hlsl"
+    output_path = "shaders/system"
+}
+
+compile_one_shader("system/post_process.hlsl") {
+    source = "system/post_process.hlsl"
+    output_path = "shaders/system"
+}
+
+group("shaders") {
+    deps = [
+        ":default.hlsl",
+        ":system/system.hlsl",
+        ":system/post_process.hlsl",
+    ]
+}

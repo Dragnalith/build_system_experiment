@@ -1,6 +1,6 @@
 group("tool"){
     deps = [
-        "texture_converter",
+        "texture_compiler",
         "shader_compiler",
     ]
 }

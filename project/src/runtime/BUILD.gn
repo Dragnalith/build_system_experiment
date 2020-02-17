@@ -28,3 +28,10 @@ group("runtime") {
       ]
   }
 }
+
+group("runtime_data") {
+  deps = [
+    "shaders",
+    "data/textures",
+  ]
+}

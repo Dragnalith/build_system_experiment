@@ -35,3 +35,27 @@ template("compile_one_texture") {
   }
 }
 
+
+template("compile_texture") {
+  assert(defined(invoker.sources), "'sources' must be defined")
+
+  output_path = ""
+  if(defined(invoker.output_path)) {
+    output_path = invoker.output_path
+  }
+
+  foreach(s, invoker.sources) {
+    source_dir = get_path_info(s, "dir")
+    compile_one_texture(s) {
+      source = s
+      output_path = "${output_path}/${source_dir}"
+    }
+  }
+
+  group(target_name) {
+    deps = []
+    foreach(s, invoker.sources) {
+      deps += [":${s}"]
+    }
+  }
+}

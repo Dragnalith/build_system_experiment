@@ -1,27 +1,11 @@
 import("//src/tool/texture_compiler/texture_compiler.gni")
 
-group ("textures") {
-  deps = [
-    ":icon/icon1.bmp",
-    ":icon/icon2.png",
-    ":texture1.bmp",
-    ":texture2.png",
+compile_texture ("textures") {
+  sources = [
+    "icon/icon1.bmp",
+    "icon/icon2.png",
+    "texture1.bmp",
+    "texture2.png",
   ]
-}
-compile_one_texture("icon/icon1.bmp") {
-  source = "icon/icon1.bmp"
-  output_path = "textures/icon"
-}
-compile_one_texture("icon/icon2.png") {
-  source = "icon/icon2.png"
-  output_path = "textures/icon"
-}
-compile_one_texture("texture1.bmp") {
-  source = "texture1.bmp"
   output_path = "textures"
 }
-compile_one_texture("texture2.png") {
-  source = "texture2.png"
-  output_path = "textures"
-}
-

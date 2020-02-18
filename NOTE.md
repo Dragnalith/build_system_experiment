@@ -38,3 +38,4 @@ Conclusion: SDK configuration depend on the platform and the toolchain, even if 
 # 18 Fev 2020
 - I am considering how to integrate C# with GN. There are two possible ways compiling with MSBuild by generating a .csproj or compiling using Roselyn directly. Compiling with Roselyn directly seems better but then I am not sure about the integration with visual studio later. Maybe the easiest is to generate a .csproj?
 - Compiling C# without WPF does not seem so hard. csc.exe is quite easy to use.
+- But compiling WPF is very. It is possible to use a custom .csproj a transform it as a XAML -> BAML compiler, but then you need to create pack URI resource. I did not find documentation yet about this process. I think the easiest is to generate a .csproj file.

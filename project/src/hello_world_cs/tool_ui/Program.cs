@@ -1,4 +1,7 @@
-﻿namespace WpfApplication1
+﻿using System;
+using System.Diagnostics;
+
+namespace WpfApplication1
 {
     public partial class App : System.Windows.Application
     {
@@ -11,6 +14,12 @@
         [System.STAThreadAttribute()]
         public static void Main()
         {
+            System.Console.Write("Hello World\n");
+            string[] resourceNames = typeof(App).Assembly.GetManifestResourceNames();
+            foreach(string resourceName in resourceNames)
+            {
+                System.Console.WriteLine(resourceName);
+            }
             WpfApplication1.App app = new WpfApplication1.App();
             app.InitializeComponent();
             app.Run();

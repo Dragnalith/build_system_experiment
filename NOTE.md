@@ -35,3 +35,6 @@ Conclusion: SDK configuration depend on the platform and the toolchain, even if 
 - It is now possible to specify the version of visual studio (2017, 2019) and the version of the windows sdk you want to use.
 # 15 Fev 2020
 - Ninja seems to only display std::cerr when a build action has failed
+# 18 Fev 2020
+- I am considering how to integrate C# with GN. There are two possible ways compiling with MSBuild by generating a .csproj or compiling using Roselyn directly. Compiling with Roselyn directly seems better but then I am not sure about the integration with visual studio later. Maybe the easiest is to generate a .csproj?
+- Compiling C# without WPF does not seem so hard. csc.exe is quite easy to use.

@@ -1,0 +1,7 @@
+csharp_assembly("tool_lib") {
+  sources = [
+      "Properties/AssemblyInfo.cs",
+      "Tools.cs",
+      "image.png",
+  ]
+}

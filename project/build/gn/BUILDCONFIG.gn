@@ -209,7 +209,10 @@ if (platform_is_mac) {
 if (host_os_is_win) {
   declare_args() {
     visual_studio_version = "2017"
+    enable_csharp = false
   }
+} else if (host_os_is_mac) {
+  enable_csharp = false
 }
 set_defaults("executable") {
   configs = [

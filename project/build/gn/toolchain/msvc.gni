@@ -60,6 +60,30 @@ template("msvc_toolchain") {
       description = "STAMP {{output}}"
     }
 
+    if (enable_csharp) {
+
+      tool("csharp_generator") {
+        outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
+        command = "python.exe gen.py"
+        description = "GENERATE .csproj $outfile"
+        outputs = [
+          outfile
+        ]
+        default_output_dir = "out/${target_name}/bin"
+        default_output_extension = ".csproj"
+      }    
+      
+      tool("csharp_msbuild") {
+        outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
+        command = "${msvc.msbuild} {{source}}"
+        description = "MSBUILD ${outfile}"
+        outputs = [
+          outfile
+        ]
+        default_output_dir = "out/${target_name}/bin"
+        default_output_extension = ".dll"
+      }
+    }
     toolchain_args = {
         current_os = invoker.os
         current_cpu = invoker.cpu

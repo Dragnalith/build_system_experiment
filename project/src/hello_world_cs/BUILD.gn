@@ -1,0 +1,5 @@
+group("hello_world_cs") {
+  deps = [
+    "tool_lib",
+  ]
+}

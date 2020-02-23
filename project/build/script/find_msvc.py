@@ -27,6 +27,7 @@ def main():
     print('lib = {}'.format(util.convert_to_gn_str(msvc_config.msvc_lib)))
     print('bin = {}'.format(util.convert_to_gn_str(msvc_config.msvc_bin)))
     print('root = {}'.format(util.convert_to_gn_str(msvc_config.msvc_path)))
+    print('msbuild = {}'.format(util.convert_to_gn_str(msvc_config.msbuild_path)))
 
 if __name__ == '__main__':
     main()

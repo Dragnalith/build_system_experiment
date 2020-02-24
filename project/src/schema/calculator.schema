@@ -6,3 +6,4 @@ data input
 
 service my_calculator
 service computer
+service new_service

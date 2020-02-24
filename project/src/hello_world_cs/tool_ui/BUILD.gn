@@ -24,5 +24,6 @@ csharp_assembly("tool_ui") {
   ]
   deps = [
     "//src/hello_world_cs/tool_lib",
+    "//src/schema:cs_calculator",
   ]
 }

@@ -1,0 +1,7 @@
+csharp_assembly("tool_cli") {
+  output_type = "Exe"
+  sources = [
+      "Properties/AssemblyInfo.cs",
+      "Program.cs",
+  ]
+}

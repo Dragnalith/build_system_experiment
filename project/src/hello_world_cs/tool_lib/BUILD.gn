@@ -1,7 +1,7 @@
 csharp_assembly("tool_lib") {
+  output_type = "Library"
   sources = [
       "Properties/AssemblyInfo.cs",
-      "Tools.cs",
-      "image.png",
+      "Tool.cs",
   ]
 }

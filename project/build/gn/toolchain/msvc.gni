@@ -62,14 +62,9 @@ template("msvc_toolchain") {
 
     if (enable_csharp) {
       tool("csharp_msbuild") {
-        outfile = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
-        command = "\"${msvc.msbuild}\" \"{{source}}\""
+        command = "\"${msvc.msbuild}\" \"{{source}}\" /nologo /t:build /v:q"
         description = "MSBUILD {{source}}"
-        outputs = [
-          outfile
-        ]
         default_output_dir = "out/${target_name}/bin"
-        default_output_extension = ".dll"
       }
     }
 

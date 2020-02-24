@@ -1,7 +1,26 @@
+config("tool_cli_config") {
+  cs_system_references = [
+    "System",
+    "System.Core",
+    "System.Xml.Linq",
+    "System.Data.DataSetExtensions",
+    "Microsoft.CSharp",
+    "System.Data",
+    "System.Net.Http",
+    "System.Xml",
+  ]
+}
+
 csharp_assembly("tool_cli") {
+  configs = [
+    ":tool_cli_config",
+  ]
   output_type = "Exe"
   sources = [
       "Properties/AssemblyInfo.cs",
       "Program.cs",
+  ]
+  deps = [
+    "//src/hello_world_cs/tool_lib"
   ]
 }

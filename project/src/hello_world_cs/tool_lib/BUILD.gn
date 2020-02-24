@@ -1,4 +1,15 @@
 csharp_assembly("tool_lib") {
+  cs_system_references = [
+    "System",
+    "System.Core",
+    "System.Xml.Linq",
+    "System.Data.DataSetExtensions",
+    "Microsoft.CSharp",
+    "System.Data",
+    "System.Net.Http",
+    "System.Xml",
+  ]
+
   output_type = "Library"
   sources = [
       "Properties/AssemblyInfo.cs",

@@ -10,7 +10,7 @@ namespace drgn
     {
         public static string GetName()
         {
-            return "DRGN Tool";
+            return "DRGN Tool!!";
         }
     }
 }

@@ -10,8 +10,9 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            //string name = drgn.Tool.GetName();
+            string name = drgn.Tool.GetName();
             Console.Write("Hello World\n");
+            Console.Write(name);
         }
     }
 }

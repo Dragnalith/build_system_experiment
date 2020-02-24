@@ -1,4 +1,6 @@
-csharp_assembly("tool_lib") {
+import("//build/gn/target/tool.gni")
+
+cs_tool_library("tool_lib") {
   cs_system_references = [
     "System",
     "System.Core",
@@ -10,7 +12,6 @@ csharp_assembly("tool_lib") {
     "System.Xml",
   ]
 
-  assembly_type = "library"
   sources = [
       "Properties/AssemblyInfo.cs",
       "Tool.cs",

@@ -18,14 +18,14 @@ TODO:
 - [x] Integrate the code generator describe above with
 - [x] Make generated file name not have the extension in their name
 - [x] Make C++ executable being able to depend on rpc generated code
-- [ ] Build tool which simulate different asset generation for different platform (shader, texture, copy)
-- [ ] Integrate the asset build tool above, and make sure about data dependencies
+- [x] Build tool which simulate different asset generation for different platform (shader, texture, copy)
+- [x] Integrate the asset build tool above, and make sure about data dependencies
+- [x] Research C# integration
+- [x] Research Visual Studio integration
+- [x] Integrate rpc_generator with C#
 - [ ] specify the path to ninja when generating visual studio project
 - [ ] Integrate external precompiled library
 - [ ] Integrate with test
-- [ ] Research C# integration
-- [ ] Research Visual Studio integration
-- [ ] Integrate rpc_generator with C#
 - [ ] Research Incredibuild integration with ninja
 - [ ] Build with fastbuild on OS X
 - [ ] DEMO: show you can change build flag and recompile (for instance tool debug, runtime release)

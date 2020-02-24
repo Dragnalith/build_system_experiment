@@ -88,6 +88,7 @@ template("compile_schema_cs") {
   csharp_assembly(target_name) {
     sources = get_target_outputs(":${target_name}_impl")
     assembly_type = "library"
+    output_dir = "${root_build_dir}/${tool_binary_relative_path}"
     deps = [
       ":${target_name}_impl(${default_toolchain})"
     ]

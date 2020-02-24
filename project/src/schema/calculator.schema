@@ -4,6 +4,6 @@ include include/data_type.schema
 
 data input
 
-service my_calculator
+service one_calculator
 service computer
 service new_service

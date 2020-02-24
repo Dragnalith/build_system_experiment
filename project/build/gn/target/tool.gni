@@ -13,3 +13,19 @@ template("tool_library") {
     forward_variables_from(invoker, "*")
   }
 }
+
+template("cs_tool_executable") {
+  csharp_assembly(target_name) {
+    assembly_type = "exe"
+    output_dir = "${root_build_dir}/${tool_binary_relative_path}"
+    forward_variables_from(invoker, "*")
+  }
+}
+
+template("cs_tool_library") {
+  csharp_assembly(target_name) {
+    assembly_type = "library"
+    output_dir = "${root_build_dir}/${tool_binary_relative_path}"
+    forward_variables_from(invoker, "*")
+  }
+}

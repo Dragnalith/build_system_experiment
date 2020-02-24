@@ -1,7 +1,0 @@
-group("hello_world_cs") {
-  deps = [
-    "tool_cli",
-    "tool_lib",
-    "tool_ui",
-  ]
-}

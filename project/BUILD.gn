@@ -5,9 +5,4 @@ group("default") {
     "//src/tool",
     "//src/runtime",
   ]
-  if (enable_csharp) {
-    deps += [
-      "//src/hello_world_cs",
-    ]
-  }
 }

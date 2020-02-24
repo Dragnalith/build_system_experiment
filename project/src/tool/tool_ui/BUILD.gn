@@ -1,4 +1,6 @@
-config("tool_cli_config") {
+import("//build/gn/target/tool.gni")
+
+cs_tool_executable("tool_ui") {
   cs_system_references = [
     "System",
     "System.Core",
@@ -8,19 +10,21 @@ config("tool_cli_config") {
     "System.Data",
     "System.Net.Http",
     "System.Xml",
+    "System.Xaml",
+    "WindowsBase",
+    "PresentationCore",
+    "PresentationFramework",
   ]
-}
 
-csharp_assembly("tool_cli") {
-  configs = [
-    ":tool_cli_config",
-  ]
-  assembly_type = "exe"
   sources = [
       "Properties/AssemblyInfo.cs",
       "Program.cs",
+      "MainWindow.xaml.cs",
+      "MainWindow.xaml",
+      "image.png",
   ]
   deps = [
-    "//src/hello_world_cs/tool_lib"
+    "//src/tool/tool_lib",
+    "//src/schema:cs_calculator",
   ]
 }

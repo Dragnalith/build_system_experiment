@@ -1,6 +1,13 @@
 group("tool"){
-    deps = [
-        "texture_compiler",
-        "shader_compiler",
+  deps = [
+    "texture_compiler",
+    "shader_compiler",
     ]
+  if (enable_csharp) {
+    deps += [
+        "tool_cli",
+        "tool_lib",
+        "tool_ui",
+    ]
+  }
 }

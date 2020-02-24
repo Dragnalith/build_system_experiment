@@ -1,0 +1,28 @@
+csharp_assembly("tool_ui") {
+  cs_system_references = [
+    "System",
+    "System.Core",
+    "System.Xml.Linq",
+    "System.Data.DataSetExtensions",
+    "Microsoft.CSharp",
+    "System.Data",
+    "System.Net.Http",
+    "System.Xml",
+    "System.Xaml",
+    "WindowsBase",
+    "PresentationCore",
+    "PresentationFramework",
+  ]
+
+  output_type = "WinExe"
+  sources = [
+      "Properties/AssemblyInfo.cs",
+      "Program.cs",
+      "MainWindow.xaml.cs",
+      "MainWindow.xaml",
+      "image.png",
+  ]
+  deps = [
+    "//src/hello_world_cs/tool_lib",
+  ]
+}

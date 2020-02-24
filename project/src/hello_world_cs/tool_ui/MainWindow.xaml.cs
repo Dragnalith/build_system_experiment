@@ -23,6 +23,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            mytext.Text = drgn.Tool.GetName();
         }
     }
 }

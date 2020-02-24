@@ -10,7 +10,7 @@ csharp_assembly("tool_lib") {
     "System.Xml",
   ]
 
-  output_type = "Library"
+  assembly_type = "library"
   sources = [
       "Properties/AssemblyInfo.cs",
       "Tool.cs",

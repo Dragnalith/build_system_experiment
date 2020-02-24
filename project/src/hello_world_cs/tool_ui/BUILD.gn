@@ -14,7 +14,7 @@ csharp_assembly("tool_ui") {
     "PresentationFramework",
   ]
 
-  output_type = "WinExe"
+  assembly_type = "winexe"
   sources = [
       "Properties/AssemblyInfo.cs",
       "Program.cs",

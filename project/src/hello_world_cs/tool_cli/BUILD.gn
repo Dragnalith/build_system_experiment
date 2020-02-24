@@ -15,7 +15,7 @@ csharp_assembly("tool_cli") {
   configs = [
     ":tool_cli_config",
   ]
-  output_type = "Exe"
+  assembly_type = "exe"
   sources = [
       "Properties/AssemblyInfo.cs",
       "Program.cs",

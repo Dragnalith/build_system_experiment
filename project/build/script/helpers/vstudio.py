@@ -19,7 +19,7 @@ class MSVCConfig:
         self.version = vs_version
         self.arch = arch
         self.install_path = get_vs_install_path(vs_version)
-        self.msbuild_path = get_msbuild_path(vs_version)
+        self.msbuild_path = self.install_path / "MSBuild/15.0/Bin/MSBuild.exe"
         self.msvc_path = get_msvc_default_path(vs_version)
         self.msvc_bin = self.msvc_path / 'bin/Host{arch}/{arch}'.format(arch=arch)
         self.msvc_include = self.msvc_path / 'include'
@@ -52,24 +52,6 @@ def run_vswhere(args):
     output = subprocess.run(command, stdout=subprocess.PIPE)
 
     return output.stdout.decode().strip("\r\n").strip('\r').strip('\n')
-
-
-def get_msbuild_path(vs_version):
-    """
-        return the install path of a Visual Studio installation.
-        'vs_version' can be "2017" or "2019"
-    """
-    assert(vs_version in vs_version_map)
-    v = vs_version_map[vs_version]
-    args = ['-version',
-            '[{},{}]'.format(v, v+1), '-find', 'MSBuild\**\Bin\MSBuild.exe']
-
-    output = run_vswhere(args)
-    if len(output) > 0:
-        return pathlib.Path(output)
-    else:
-        return None
-
 
 def get_vs_install_path(vs_version):
     """

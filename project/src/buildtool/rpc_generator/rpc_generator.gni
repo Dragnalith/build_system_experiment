@@ -79,20 +79,20 @@ template("compile_schema_cpp") {
   }
 }
 
-template("compile_schema_cs") {
-  compile_schema_impl(target_name + "_impl") {
-    forward_variables_from(invoker, "*")
-    language = "cs"
-  }
+if (enable_csharp) {
+  template("compile_schema_cs") {
+    compile_schema_impl(target_name + "_impl") {
+      forward_variables_from(invoker, "*")
+      language = "cs"
+    }
 
-  csharp_assembly(target_name) {
-    sources = get_target_outputs(":${target_name}_impl")
-    assembly_type = "library"
-    output_dir = "${root_build_dir}/${tool_binary_relative_path}"
-    deps = [
-      ":${target_name}_impl(${default_toolchain})"
-    ]
+    csharp_assembly(target_name) {
+      sources = get_target_outputs(":${target_name}_impl")
+      assembly_type = "library"
+      output_dir = "${root_build_dir}/${tool_binary_relative_path}"
+      deps = [
+        ":${target_name}_impl(${default_toolchain})"
+      ]
+    }
   }
 }
-
-

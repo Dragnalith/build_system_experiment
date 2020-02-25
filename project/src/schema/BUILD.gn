@@ -15,17 +15,19 @@ compile_schema_cpp("assets") {
     output_path = "drgn/generated"
 }
 
-compile_schema_cs("cs_calculator") {
-    sources = [
-        "calculator.schema"
-    ]
-    output_path = "CSharp/drgn/generated"
-    is_service = true
-}
+if (enable_csharp) {
+    compile_schema_cs("cs_calculator") {
+        sources = [
+            "calculator.schema"
+        ]
+        output_path = "CSharp/drgn/generated"
+        is_service = true
+    }
 
-compile_schema_cs("cs_assets") {
-    sources = [
-        "assets.schema"
-    ]
-    output_path = "CSharp/drgn/generated"
+    compile_schema_cs("cs_assets") {
+        sources = [
+            "assets.schema"
+        ]
+        output_path = "CSharp/drgn/generated"
+    }
 }

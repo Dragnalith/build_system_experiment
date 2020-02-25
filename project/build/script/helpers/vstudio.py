@@ -3,14 +3,16 @@ import subprocess
 import helpers.environment as env
 
 vs_version_map = {
-    '2017' : 15,
-    '2019' : 16
+    '2017': 15,
+    '2019': 16
 }
+
 
 class MSVCConfig:
     """
         Gather information about a particular MSVC distribution
     """
+
     def __init__(self, vs_version, arch):
         assert(arch in ['x86', 'x64'])
 
@@ -30,7 +32,8 @@ class MSVCConfig:
         self.msvc_lib.resolve()
 
     def __str__(self):
-        result = 'Visual Studio {} Config for {}\n'.format(self.version, self.arch)
+        result = 'Visual Studio {} Config for {}\n'.format(
+            self.version, self.arch)
         result += 'install_path={}\n'.format(self.install_path)
         result += 'msvc_path={}\n'.format(self.msvc_path)
         result += 'msvc_bin={}\n'.format(self.msvc_bin)
@@ -39,15 +42,17 @@ class MSVCConfig:
 
         return result
 
+
 def run_vswhere(args):
     """
         Helper to run vswhere.exe in order to find information about
         local visual studio installation.
     """
-    command = [env.path.vswhere, '-nologo'] + args
+    command = [str(env.path.vswhere), '-nologo'] + args
     output = subprocess.run(command, stdout=subprocess.PIPE)
-    
+
     return output.stdout.decode().strip("\r\n").strip('\r').strip('\n')
+
 
 def get_msbuild_path(vs_version):
     """
@@ -56,13 +61,15 @@ def get_msbuild_path(vs_version):
     """
     assert(vs_version in vs_version_map)
     v = vs_version_map[vs_version]
-    args = ['-version', '[{},{}]'.format(v, v+1), '-find', 'MSBuild\**\Bin\MSBuild.exe']
+    args = ['-version',
+            '[{},{}]'.format(v, v+1), '-find', 'MSBuild\**\Bin\MSBuild.exe']
 
     output = run_vswhere(args)
     if len(output) > 0:
         return pathlib.Path(output)
     else:
         return None
+
 
 def get_vs_install_path(vs_version):
     """
@@ -71,13 +78,15 @@ def get_vs_install_path(vs_version):
     """
     assert(vs_version in vs_version_map)
     v = vs_version_map[vs_version]
-    args = ['-version', '[{},{}]'.format(v, v+1), '-property', 'installationPath']
+    args = ['-version',
+            '[{},{}]'.format(v, v+1), '-property', 'installationPath']
 
     output = run_vswhere(args)
     if len(output) > 0:
         return pathlib.Path(output)
     else:
         return None
+
 
 def get_msvc_default_version(install_path):
     """
@@ -92,6 +101,7 @@ def get_msvc_default_version(install_path):
 
     with open(version_file, 'r') as file:
         return file.read().strip("\r\n").strip('\n').strip('\r')
+
 
 def get_msvc_default_path(vs_version):
     """
@@ -114,6 +124,7 @@ def get_msvc_default_path(vs_version):
 
 def get_msvc_config(vs_version, arch):
     return MSVCConfig(vs_version, arch)
+
 
 def test_print():
     configs = [

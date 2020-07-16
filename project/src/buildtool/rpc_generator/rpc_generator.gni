@@ -79,7 +79,7 @@ template("compile_schema_cpp") {
   }
 }
 
-if (enable_csharp) {
+if (csharp_enabled) {
   template("compile_schema_cs") {
     compile_schema_impl(target_name + "_impl") {
       forward_variables_from(invoker, "*")

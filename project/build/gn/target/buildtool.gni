@@ -4,6 +4,9 @@ template("buildtool_executable") {
   executable(target_name) {
     output_dir = "${root_build_dir}/${buildtool_binary_relative_path}"
     forward_variables_from(invoker, "*")
+    if (!buildtool_optimized) {
+      configs += ["//build/gn/config:debug_cpp"]
+    }
   }
 }
 
@@ -11,5 +14,8 @@ template("buildtool_library") {
   static_library(target_name) {
     output_dir = "${root_build_dir}/${buildtool_library_relative_path}"
     forward_variables_from(invoker, "*")
+    if (!buildtool_optimized) {
+      configs += ["//build/gn/config:debug_cpp"]
+    }
   }
 }

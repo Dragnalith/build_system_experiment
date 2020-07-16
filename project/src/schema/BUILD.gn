@@ -15,7 +15,7 @@ compile_schema_cpp("assets") {
     output_path = "drgn/generated"
 }
 
-if (enable_csharp) {
+if (csharp_enabled) {
     compile_schema_cs("cs_calculator") {
         sources = [
             "calculator.schema"

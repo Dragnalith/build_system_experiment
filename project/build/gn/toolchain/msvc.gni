@@ -60,7 +60,7 @@ template("msvc_toolchain") {
       description = "STAMP {{output}}"
     }
 
-    if (enable_csharp) {
+    if (csharp_enabled) {
       tool("csharp_msbuild") {
         command = "\"${msvc.msbuild}\" \"{{source}}\" /nologo /t:build /v:q"
         description = "MSBUILD {{source}}"

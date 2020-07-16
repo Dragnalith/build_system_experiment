@@ -1,6 +1,30 @@
 config("default_cpp") {
     configs = [
       "//build/gn/config/platform/$platform_id:default",
-      "//build/gn/config/platform/$platform_id:debug",
     ]
+    defines = []
+    if (assert_enabled) {
+      defines += [
+        "DRGN_ASSERT_ENABLED=1"
+      ]
+    } else {
+      defines += [
+        "DRGN_ASSERT_ENABLED=0"
+      ]
+    }
+    if (log_enabled) {
+      defines += [
+        "DRGN_LOG_ENABLED=1"
+      ]
+    } else {
+      defines += [
+        "DRGN_LOG_ENABLED=0"
+      ]
+    }
+}
+
+config("debug_cpp") {
+  configs = [
+      "//build/gn/config/platform/$platform_id:debug",
+  ]
 }

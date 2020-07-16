@@ -3,6 +3,9 @@ config("debug") {
       "/DEBUG",
       "/ZI"
   ]
+  defines = [
+      "DRGN_DEBUG"
+  ]
   ldflags = [
       "/DEBUG",
       "/OPT:NOICF",

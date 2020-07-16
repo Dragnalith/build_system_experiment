@@ -4,6 +4,9 @@ template("tool_executable") {
   executable(target_name) {
     output_dir = "${root_build_dir}/${tool_binary_relative_path}"
     forward_variables_from(invoker, "*")
+    if (!tool_optimized) {
+      configs += ["//build/gn/config:debug_cpp"]
+    }
   }
 }
 
@@ -11,6 +14,9 @@ template("tool_library") {
   static_library(target_name) {
     output_dir = "${root_build_dir}/${tool_library_relative_path}"
     forward_variables_from(invoker, "*")
+    if (!tool_optimized) {
+      configs += ["//build/gn/config:debug_cpp"]
+    }
   }
 }
 

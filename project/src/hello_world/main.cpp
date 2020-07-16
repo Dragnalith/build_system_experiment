@@ -13,6 +13,11 @@ const char* g_CompilerName = "Undefined Compiler";
 #endif
 
 int main() {
+#ifndef DRGN_DEBUG
+    std::cout << "Optimized version" << '\n';
+#else 
+    std::cout << "Debug version" << '\n';
+#endif
     std::cout << "Hello World from compiler" << g_CompilerName << "\n";
     
     return 0;

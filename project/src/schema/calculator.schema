@@ -6,4 +6,4 @@ data input
 
 service one_calculator
 service computer
-service new_service
+service another_service

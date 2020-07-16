@@ -1,3 +1,6 @@
 /out/*
 __pycache__
 .vscode
+project/_out
+project/_out2
+project/_out3

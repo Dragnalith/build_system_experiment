@@ -1,17 +1,15 @@
-# Purpose
+# Features
 
-The purpose of that repository is to evaluate different build system.
-
-For that I am creating the mock 'project' folder and will configure its build with different build system.
-
-The build system I have in mind at first:
-- GN
-- Fastbuild
-
-Then maybe:
-- Bazel (but it does not deal with dynamic dependencies)
-- Premake (but is it possible to easily extend the ninja generator?)
-- Meson (but is it possible to add new toolchain, new language, and build for multiple platform with the same buildgraph)
-
-Won't be tested:
-- CMake, because it is not possible to generate a build graph for several platform at the same time
+- Multiplatform build system: 
+  - build for any platform as part as the same build graph
+  - reuse tool from one platform to build for another
+- Compatible with code generator:
+  - you can create code generator build rule
+  - code generator tool can be built as dependency of code generator build rule
+- Compatible with runtime data compilation
+  - application can have data dependency
+  - custom buile rule can be added to convert your data (texture, font, shader)
+- Compatible with C# and 
+- Build output folder independent from source tree
+- Fine grain build flag (per build output folder)
+- Integration with Visual Studio

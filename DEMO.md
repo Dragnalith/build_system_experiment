@@ -16,6 +16,9 @@
   - Runtime
   - Tool
   - Tool UI
+- Check data
+  - Texture
+  - Image
 
 ## Compile everything necessary, but only what is necessary
 
@@ -33,14 +36,27 @@
 
 - Recompile everything
 - Change service file and check recompiling runtime will re-generated code
+  * Open service file
+  * Open generated file
 - Change code generator code and check recompiing runtime will recompile code generator and re-generate code
+  * Open rpc_generate source file
 
 ## Asset data are compiled as runtime dependency
 
+
 - Change data and check recompiling runtime will recompile
+    - recompile only one runtime and check only data for that runtime has been recompiled
+    $ ..\bin\win\ninja.exe -C _out out/runtime/Win64/bin/runtime_app.exe
 - Change compiler code and check recompiling runtime will recompile shader
 
 ## Build folder
+
+csharp_enabled=true
+buildtool_optimized=true
+runtime_optimized=true
+tool_optimized=true
+assert_enabled=true
+log_enabled=true
 
 - Configure another build folder, notify build is independent from build output folder
 - Configure another folder with another preset

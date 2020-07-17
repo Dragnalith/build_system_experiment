@@ -17,6 +17,11 @@ config("default") {
         ":msvc",
     ]
   }
+  if (host_os_is_mac) {
+    cflags = [
+      "-std=c++17"
+    ]
+  }
   defines = [
       "DRGN_PLATFORM_IS_CONSOLE2=1"
   ]

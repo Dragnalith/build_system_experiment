@@ -273,7 +273,7 @@ int main(int argc, char **argv)
 			}
 			header << '\n';
 
-			header << "constexpr const char* ServiceInfo[] = {\n";
+			header << "static const char* ServiceInfo[] = {\n";
 			for (auto &service : context.services)
 			{
 				header << "    \"" << service << "\",\n";

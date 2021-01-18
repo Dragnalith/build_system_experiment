@@ -19,7 +19,7 @@ class MSVCConfig:
         self.version = vs_version
         self.arch = arch
         self.install_path = get_vs_install_path(vs_version)
-        self.msbuild_path = self.install_path / "MSBuild/15.0/Bin/MSBuild.exe"
+        self.msbuild_path = self.install_path / "MSBuild/Current/Bin/MSBuild.exe"
         self.msvc_path = get_msvc_default_path(vs_version)
         self.msvc_bin = self.msvc_path / 'bin/Host{arch}/{arch}'.format(arch=arch)
         self.msvc_include = self.msvc_path / 'include'

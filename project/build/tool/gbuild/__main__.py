@@ -51,7 +51,7 @@ def generate(ctx: BuildContext):
     gn_args = ctx.variant_file.read_text()
 
     print('generate (variant = {})'.format(ctx.variant))
-    args = ['gen', ctx.build_folder, '--ide=vs', '--args={}'.format(gn_args)]
+    args = ['gen', ctx.build_folder, '--ide=vs', '--ninja-executable={}'.format(settings.ninja.absolute()) ,'--args={}'.format(gn_args)]
 
     if ctx.verbose:
         args.append('--verbose')

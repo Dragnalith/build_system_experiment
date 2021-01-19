@@ -56,7 +56,7 @@ template("msvc_toolchain") {
 
     if (csharp_enabled) {
       tool("csharp_msbuild") {
-        command = "\"${msvc.msbuild}\" \"{{source}}\" /nologo /t:build /v:q"
+        command = "\"${msvc.msbuild}\" \"{{source}}\" /nologo /t:build /v:q /p:Configuration=GN /p:Platform=x64"
         description = "MSBUILD {{source}}"
         default_output_dir = "out/${target_name}/bin"
       }

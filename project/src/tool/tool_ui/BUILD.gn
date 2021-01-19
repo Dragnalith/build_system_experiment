@@ -26,5 +26,6 @@ cs_tool_executable("tool_ui") {
   deps = [
     "//src/tool/tool_lib",
     "//src/schema:cs_calculator",
+    "//src/schema:cs_assets",
   ]
 }

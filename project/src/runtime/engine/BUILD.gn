@@ -18,5 +18,6 @@ runtime_library("engine") {
   ]
   deps = [
     "//src/schema:calculator",
+    "//src/schema:assets",
   ]
 }

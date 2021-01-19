@@ -37,8 +37,13 @@ template("compile_schema_impl") {
       ]
       outputs = [ 
         "${root_build_dir}/${output_dir}/{{source_name_part}}.cs",
-        "${root_build_dir}/${output_dir}/{{source_name_part}}.service.cs",
       ]
+
+      if (defined(invoker.is_service) && invoker.is_service) {
+        outputs += [
+          "${root_build_dir}/${output_dir}/{{source_name_part}}.service.cs",
+        ]
+      }
     }
 
     if (defined(invoker.is_service) && invoker.is_service) {

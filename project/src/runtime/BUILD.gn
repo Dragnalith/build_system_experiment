@@ -1,31 +1,18 @@
-# list of all runtime targets
 runtime_targets = [
   "engine",
   "runtime_app",
 ]
 
-foreach(p, runtime_toolchains) {
-  runtime_platform = p[0]
-  runtime_toolchain = p[1]
-
-  group("runtime_" + runtime_platform) {
-    deps = []
-    foreach(t, runtime_targets) {
-      deps += [
-        t + "($runtime_toolchain)"
-      ]
-    }
-  }
-}
-
 # compile runtime target for every toolchains
 group("runtime") {
   deps = []
   foreach(t, runtime_toolchains) {
-    runtime_platform = t[0]
-    deps += [
-      ":runtime_${runtime_platform}"
-    ]
+    _toolchain = t[1]
+    foreach(target, runtime_targets) {
+      deps += [
+        "$target($_toolchain)",
+      ]
+    }
   }
 }
 

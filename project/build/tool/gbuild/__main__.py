@@ -34,6 +34,11 @@ class BuildContext:
         self.build_folder = settings.build_root / self.variant
         self.variant_path_file = self.build_folder / settings.variant_path_filename
 
+        if args.targets is not None:
+            self.targets = [x.strip('/') for x in args.targets]
+        else:
+            self.targets = []
+
 def configure(args: argparse.Namespace):
     print('configure')
     environment.generate();
@@ -46,7 +51,11 @@ def generate(ctx: BuildContext):
     gn_args = ctx.variant_file.read_text()
 
     print('generate (variant = {})'.format(ctx.variant))
-    exitcode = gn.run(['gen', ctx.build_folder, '--ide=vs', '--args={}'.format(gn_args)])
+    args = ['gen', ctx.build_folder, '--ide=vs', '--args={}'.format(gn_args)]
+
+    if ctx.verbose:
+        args.append('--verbose')
+    exitcode = gn.run(args)
     assert exitcode == 0, "generate has failed (GN execution return {}".format(exitcode)
 
     ctx.variant_path_file.write_text(str(ctx.variant_file.absolute()))
@@ -67,9 +76,16 @@ def build(ctx: BuildContext):
 
     print('build (variant = {})'.format(ctx.variant))
 
+    if len(ctx.targets) > 0:
+        print("Build the following target:")
+        for t in ctx.targets:
+            print('    //{}'.format(t))
+
     args = ['-C', ctx.build_folder]
     if ctx.verbose:
         args.append('--verbose')
+
+    args += ctx.targets
 
     ninja.run(args)
 
@@ -83,11 +99,25 @@ def clean(ctx: BuildContext, all = False):
             print('Nothing to do.')
     else:
         print('clean (variant = {})'.format(ctx.variant))
-        if ctx.build_folder.exists():
-            shutil.rmtree(ctx.build_folder)
-            print('The build folder {} has been deleted.'.format(ctx.build_folder))
+
+        if len(ctx.targets) > 0:
+            print("Clean the following target:")
+            for t in ctx.targets:
+                print('    //{}'.format(t))
+
+            args = ['-C', ctx.build_folder, '-tclean']
+            if ctx.verbose:
+                args.append('--verbose')
+
+            args += ctx.targets
+
+            ninja.run(args)
         else:
-            print('Nothing to do.')
+            if ctx.build_folder.exists():
+                shutil.rmtree(ctx.build_folder)
+                print('The build folder {} has been deleted.'.format(ctx.build_folder))
+            else:
+                print('Nothing to do.')
 
 def configure_command(args: argparse.Namespace):
     configure(args)
@@ -113,6 +143,7 @@ def main():
     common_parser.add_argument('--verbose', '-v', action='store_true', help='display more information about the command execution')
     
     build_context_parser = argparse.ArgumentParser(add_help=False)                    
+    build_context_parser.add_argument('targets', nargs='*', action='store', help='list of targets to be built.')
     variant_group = build_context_parser.add_mutually_exclusive_group()
     variant_group.add_argument('--variant', default=settings.default_variant, choices=settings.variants, help='select which build option set to be used for the build (from existing build file')
     variant_group.add_argument('--variant_file', help='select which build option set to be used for the build')
@@ -121,20 +152,20 @@ def main():
     parser.set_defaults(command=None)
     subparsers = parser.add_subparsers()
 
-    configure_parser = subparsers.add_parser('configure', help='find environment information necessary to run the build (toolchain, sdk path, ...)', parents=[common_parser])
+    configure_parser = subparsers.add_parser('configure', help='find environment information necessary to run the build (toolchain, sdk path, ...).', parents=[common_parser])
     configure_parser.set_defaults(command=configure_command)
     
-    generate_parser = subparsers.add_parser('generate', aliases=['gen'], help='generate ninja file for a particular build variant', parents=[common_parser, build_context_parser])
+    generate_parser = subparsers.add_parser('generate', aliases=['gen'], help='generate ninja file for a particular build variant.', parents=[common_parser, build_context_parser])
     generate_parser.set_defaults(command=generate_command)
 
-    list_options_parser = subparsers.add_parser('list_options', aliases=['gen'], help='list the build option available', parents=[common_parser, build_context_parser])
+    list_options_parser = subparsers.add_parser('list_options', aliases=['gen'], help='list the build option available.', parents=[common_parser, build_context_parser])
     list_options_parser.set_defaults(command=list_options_command)
 
-    build_parser = subparsers.add_parser('build', help='build targets of a particular build variant', parents=[common_parser, build_context_parser])
+    build_parser = subparsers.add_parser('build', help='build targets of a particular build variant.', parents=[common_parser, build_context_parser])
     build_parser.set_defaults(command=build_command)
 
-    clean_parser = subparsers.add_parser('clean', help='clean target and intermediate data of a particular build variant', parents=[common_parser, build_context_parser])
-    clean_parser.add_argument('--all', action='store_true', help='Clean all variant and environment (delete all {})'.format(settings.build_root))
+    clean_parser = subparsers.add_parser('clean', help='clean target and intermediate data of a particular build variant.', parents=[common_parser, build_context_parser])
+    clean_parser.add_argument('--all', action='store_true', help='Clean all variant and environment (delete all {}).'.format(settings.build_root))
     clean_parser.set_defaults(command=clean_command)
 
     

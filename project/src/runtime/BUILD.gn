@@ -23,9 +23,9 @@ group("runtime") {
   deps = []
   foreach(t, runtime_toolchains) {
     runtime_platform = t[0]
-      deps += [
-        ":runtime_${runtime_platform}"
-      ]
+    deps += [
+      ":runtime_${runtime_platform}"
+    ]
   }
 }
 

@@ -89,7 +89,11 @@ def clean_dir(path):
             all_removed = clean_dir(child) and all_removed
     
     if all_removed:
-        path.rmdir()
+        try:
+            path.rmdir()
+        except:
+            print("WARNING: {} could not be removed".format(child))
+            
         return True
     
     return False

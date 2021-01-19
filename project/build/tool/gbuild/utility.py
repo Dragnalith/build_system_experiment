@@ -70,3 +70,26 @@ def convert_to_gn_str(value):
         return convert_to_gn_str(str(value))
 
     raise IncompatibleTypeError('The type {} cannot be converted to gn value'.format(type(value)))
+
+def clean_dir(path):
+    """
+        Remove a directory recursively. Does not stop if removing a file fail, remove the maximum
+    """
+
+    path = pathlib.Path(path)
+    all_removed = True
+    for child in path.glob('*'):
+        if child.is_file():
+            try:
+                child.unlink()
+            except:
+                all_removed = False
+                print("WARNING: {} could not be removed".format(child))
+        else:
+            all_removed = clean_dir(child) and all_removed
+    
+    if all_removed:
+        path.rmdir()
+        return True
+    
+    return False

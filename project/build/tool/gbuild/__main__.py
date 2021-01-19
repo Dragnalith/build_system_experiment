@@ -1,12 +1,12 @@
 import argparse
 import pathlib
-import shutil
 import sys
 
 import gn
 import ninja
 import settings
 import environment
+import utility
 
 class BuildContext:
     def __init__(self, args):
@@ -93,8 +93,10 @@ def clean(ctx: BuildContext, all = False):
     if all:
         print('clean all')
         if settings.build_root.exists():
-            shutil.rmtree(settings.build_root)
-            print('The build folder {} has been deleted.'.format(settings.build_root))
+            if utility.clean_dir(settings.build_root):
+                print('The build folder {} has been deleted.'.format(settings.build_root))
+            else:
+                print('The build folder {} could not been deleted. Some files remain'.format(ctx.build_folder))
         else:
             print('Nothing to do.')
     else:
@@ -114,8 +116,10 @@ def clean(ctx: BuildContext, all = False):
             ninja.run(args)
         else:
             if ctx.build_folder.exists():
-                shutil.rmtree(ctx.build_folder)
-                print('The build folder {} has been deleted.'.format(ctx.build_folder))
+                if utility.clean_dir(ctx.build_folder):
+                    print('The build folder {} has been deleted.'.format(ctx.build_folder))
+                else:
+                    print('The build folder {} could not been deleted. Some files remain'.format(ctx.build_folder))
             else:
                 print('Nothing to do.')
 

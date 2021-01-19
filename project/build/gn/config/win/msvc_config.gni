@@ -9,7 +9,7 @@
 
 assert(host_os_is_win)
 
-msvc = exec_script("//build/script/find_msvc.py", [ visual_studio_version, current_cpu, ], "scope")
+msvc = read_file("//_generated/environment/msvc_" + current_cpu, "scope")
 
 template("msvc_config") {
   forward_variables_from(invoker, []) # trick so the fact invoker is unused does not create error

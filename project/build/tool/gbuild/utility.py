@@ -23,6 +23,15 @@ def find_root_mark(mark: str):
 
     return current_dir
 
+def generate_environment_block(env):
+    block = ''
+    nul = '\0'
+    for key, value in env.items():
+        block += key + '=' + value + nul
+    block += nul
+
+    return block
+
 def write_environment_block(filepath, env):
     """
         Write a dict as a file using the format required by the windows API CreateProcess to
@@ -32,12 +41,7 @@ def write_environment_block(filepath, env):
     filepath.parent.mkdir(parents=True,exist_ok=True)
 
     with open(filepath, 'w') as f:
-        block = ''
-        nul = '\0'
-        for key, value in env.items():
-            block += key + '=' + value + nul
-        block += nul
-        f.write(block)
+        f.write(generate_environment_block(env))
 
 def write_ninja_file(filepath, env):
     """

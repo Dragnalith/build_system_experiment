@@ -3,14 +3,8 @@ import("//build/gn/ninja.gni")
 touch_path = rebase_path("touch.py", root_build_dir)
 
 template("msvc_toolchain") {
-  env = "msvc_environment." + target_name
-  env_path = rebase_path(root_build_dir + "/" + env)
-  
-  # it is not possible to re-use msvc from //build/gn/config/msvc_config.gni
-  # because it is the value for the current_cpu, where here we want the value for 
-  # the invoker.cpu
-  msvc = exec_script("//build/script/find_msvc.py", [ visual_studio_version, invoker.cpu, ], "scope")
-  exec_script("//build/script/setup_msvc_environment.py", [ msvc.bin, env_path,], "scope")
+  env = "../environment/msvc_environment." + invoker.cpu
+  msvc = read_file("//_generated/environment/msvc_" + invoker.cpu, "scope")
 
   toolchain(target_name) {
     lib_switch = "" # built-in variable: How libraries input should be expanded

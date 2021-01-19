@@ -13,6 +13,7 @@ class BuildContext:
         assert(args.variant is not None)
 
         self.args = args
+        self.verbose = args.verbose
         self.variant = args.variant
         self.build_folder = settings.build_root / self.variant
 
@@ -35,7 +36,12 @@ def build(ctx: BuildContext):
         generate(ctx)
 
     print('build (variant = {})'.format(ctx.variant))
-    ninja.run(['-C', ctx.build_folder])
+
+    args = ['-C', ctx.build_folder]
+    if ctx.verbose:
+        args.append('--verbose')
+
+    ninja.run(args)
 
 def clean(ctx: BuildContext, all = False):
     print('clean (variant = {})'.format(ctx.variant))
@@ -98,6 +104,7 @@ def main():
         parser.print_help()
     else:
         if arguments.verbose:
+            print('Verbose logger is enabled.')
             settings.verbose = True
 
         arguments.command(arguments)

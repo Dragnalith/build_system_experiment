@@ -8,12 +8,7 @@
 
 assert(host_os_is_win)
 
-
-declare_args() {
-  winsdk_version = ""
-}
-
-winsdk_config = exec_script("//build/script/find_winsdk.py", [winsdk_version], "scope")
+winsdk_config = read_file("//_generated/environment/winsdk", "scope")
 
 template("winsdk_config") {
   forward_variables_from(invoker, []) # trick so the fact invoker is unused does not create error

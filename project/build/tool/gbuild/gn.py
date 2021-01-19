@@ -7,6 +7,6 @@ def run(args):
 
     print("Run GN:")
     if settings.verbose:
-        print('({})'.format(' '.join(command)))
+        print('({})'.format(' '.join([str(x) for x in command])))
 
-    subprocess.run(command)
+    return subprocess.run(command).returncode

@@ -6,6 +6,7 @@ import sys
 import gn
 import ninja
 import settings
+import environment
 
 class BuildContext:
     def __init__(self, args):
@@ -16,27 +17,40 @@ class BuildContext:
         self.build_folder = settings.build_root / self.variant
 
 def configure(args: argparse.Namespace):
-    pass
+    print('configure')
+    environment.generate();
 
 def generate(ctx: BuildContext):
+    if not environment.all_exists():
+        print("environment was not generated, so run 'configure'.")
+        configure(ctx.args)
+
     print('generate (variant = {})'.format(ctx.variant))
-    gn.run(['gen', ctx.build_folder, '--ide=vs'])
+    exitcode = gn.run(['gen', ctx.build_folder, '--ide=vs'])
+    assert exitcode == 0, "generate has failed (GN execution return {}".format(exitcode)
 
 def build(ctx: BuildContext):
     if not ctx.build_folder.is_dir():
-        print("variant '{}' was not generated yet.".format(ctx.variant))
+        print("variant '{}' build file are not generated, so run 'generate'.".format(ctx.variant))
         generate(ctx)
 
     print('build (variant = {})'.format(ctx.variant))
     ninja.run(['-C', ctx.build_folder])
 
-def clean(ctx: BuildContext):
+def clean(ctx: BuildContext, all = False):
     print('clean (variant = {})'.format(ctx.variant))
-    if ctx.build_folder.exists():
-        shutil.rmtree(ctx.build_folder)
-        print('The build folder {} has been removed.'.format(ctx.build_folder))
+    if all:
+        if settings.build_root.exists():
+            shutil.rmtree(settings.build_root)
+            print('The build folder {} has been deleted.'.format(settings.build_root))
+        else:
+            print('Nothing to do.')
     else:
-        print('Nothing to do.')
+        if ctx.build_folder.exists():
+            shutil.rmtree(ctx.build_folder)
+            print('The build folder {} has been deleted.'.format(ctx.build_folder))
+        else:
+            print('Nothing to do.')
 
 def configure_command(args: argparse.Namespace):
     configure(args)
@@ -51,7 +65,7 @@ def build_command(args: argparse.Namespace):
 
 def clean_command(args: argparse.Namespace):
     ctx = BuildContext(args)
-    clean(ctx)
+    clean(ctx, args.all)
 
 def main():
     common_parser = argparse.ArgumentParser(add_help=False)                                 
@@ -73,8 +87,9 @@ def main():
     build_parser = subparsers.add_parser('build', help='build targets of a particular build variant', parents=[common_parser, build_context_parser])
     build_parser.set_defaults(command=build_command)
 
-    build_parser = subparsers.add_parser('clean', help='clean target and intermediate data of a particular build variant', parents=[common_parser, build_context_parser])
-    build_parser.set_defaults(command=clean_command)
+    clean_parser = subparsers.add_parser('clean', help='clean target and intermediate data of a particular build variant', parents=[common_parser, build_context_parser])
+    clean_parser.add_argument('--all', action='store_true', help='Clean all variant and environment (delete all {})'.format(settings.build_root))
+    clean_parser.set_defaults(command=clean_command)
 
     
     arguments = parser.parse_args()

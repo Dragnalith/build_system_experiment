@@ -216,7 +216,6 @@ declare_args() {
 
 if (host_os_is_win) {
   declare_args() {
-    visual_studio_version = "2019"
     csharp_enabled = true
   }
 } else if (host_os_is_mac) {

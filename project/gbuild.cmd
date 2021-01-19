@@ -1,13 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-pushd %~dp0
+python %~dp0\build\tool\gbuild %* || goto :error
 
-python build\tool\gbuild %* || goto :error
-
-popd
 exit /b 0
 
 :error
-popd
 exit /b !errorlevel!

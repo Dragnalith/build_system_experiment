@@ -34,10 +34,10 @@ namespace drgn
         return "Win32";
 #elif DRGN_PLATFORM_IS_MAC
         return "Mac";
-#elif DRGN_PLATFORM_IS_CONSOLE1
-        return "Console1";
-#elif DRGN_PLATFORM_IS_CONSOLE2
-        return "Console2";
+#elif DRGN_PLATFORM_IS_NX
+        return "NX";
+#elif DRGN_PLATFORM_IS_ORBIS
+        return "ORBIS";
 #endif
     }
 

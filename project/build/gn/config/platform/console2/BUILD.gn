@@ -23,7 +23,7 @@ config("default") {
     ]
   }
   defines = [
-      "DRGN_PLATFORM_IS_CONSOLE2=1"
+      "DRGN_PLATFORM_IS_ORBIS=1"
   ]
 }
 

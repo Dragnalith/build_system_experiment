@@ -9,8 +9,8 @@ enum class Platform {
     Win64,
     Win32,
     Mac,
-    Console1,
-    Console2
+    NX,
+    ORBIS
 };
 
 struct Config {
@@ -48,14 +48,14 @@ Config parse_arg(int argc, char** argv) {
 
     if (platform_name == "Win32") {
         config.platform = Platform::Win32;
-    } else if (platform_name == "Win64") {
+    } else if (platform_name == "Windows") {
         config.platform = Platform::Win64;
     } else if (platform_name == "Mac") {
         config.platform = Platform::Mac;
-    } else if (platform_name == "Console1") {
-        config.platform = Platform::Console1;
-    } else if (platform_name == "Console2") {
-        config.platform = Platform::Console2;
+    } else if (platform_name == "NX") {
+        config.platform = Platform::NX;
+    } else if (platform_name == "ORBIS") {
+        config.platform = Platform::ORBIS;
     } else {
         assert(false && "Platform is unknown");
     }
@@ -79,10 +79,10 @@ int main(int argc, char** argv) {
     case Platform::Win64:
         mark = "WIN64";
         break;
-    case Platform::Console1:
+    case Platform::NX:
         mark = "CONSOLE1";
         break;
-    case Platform::Console2:
+    case Platform::ORBIS:
         mark = "CONSOLE2";
         break;
     case Platform::Mac:

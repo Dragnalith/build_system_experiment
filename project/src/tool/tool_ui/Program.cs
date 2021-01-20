@@ -14,12 +14,12 @@ namespace WpfApplication1
         [System.STAThreadAttribute()]
         public static void Main()
         {
-            System.Console.Write("Hello World\n");
+            System.Console.Write("Hellooooo World\n");
             string[] resourceNames = typeof(App).Assembly.GetManifestResourceNames();
             foreach(string resourceName in resourceNames)
             {
                 System.Console.WriteLine(resourceName);
-            }
+            }  
             WpfApplication1.App app = new WpfApplication1.App();
             app.InitializeComponent();
             app.Run();

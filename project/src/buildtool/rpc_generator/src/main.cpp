@@ -291,7 +291,7 @@ int main(int argc, char **argv)
 				cpp << "};\n\n";
 			}
 		}
-		if (config.language == Language::CSharp && config.generate_service)
+		if (config.language == Language::CSharp && config.generate_service) 
 		{
 			std::ofstream cs(context.cs_service_output.c_str());
 			assert(cs.is_open() && "cs_serice_output cannot be open");

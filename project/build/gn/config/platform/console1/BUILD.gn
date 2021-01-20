@@ -23,7 +23,7 @@ config("default") {
     ]
   }
   defines = [
-      "DRGN_PLATFORM_IS_CONSOLE1=1"
+      "DRGN_PLATFORM_IS_NX=1"
   ]
 }
 

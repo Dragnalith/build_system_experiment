@@ -73,10 +73,10 @@ platform_is_win_x86 = false
 platform_is_console1 = false
 platform_is_console2 = false
 platform_name_mac = "Mac"
-platform_name_win_x64 = "Win64"
+platform_name_win_x64 = "Windows"
 platform_name_win_x86 = "Win32"
-platform_name_console1 = "Console1"
-platform_name_console2 = "Console2"
+platform_name_console1 = "NX"
+platform_name_console2 = "ORBIS"
 platform_toolchain_name_mac = platform_name_mac
 platform_toolchain_name_win_x64 = platform_name_win_x64
 platform_toolchain_name_win_x86 = platform_name_win_x86
@@ -172,21 +172,52 @@ if (host_platform_is_mac) {
 
 # Set default toolchain per platform
 if (host_platform_is_mac) {
+
+  declare_args() {
+    nx_enabled = true
+    orbis_enabled = true
+  }
+
   runtime_toolchains = [
     [platform_name_mac, toolchain_mac,],
-    [platform_name_console1, toolchain_console1,],
-    [platform_name_console2, toolchain_console2,],
   ]
+  if (nx_enabled) {
+    runtime_toolchains += [
+      [platform_name_console1, toolchain_console1,],
+    ]
+  }
+  if (orbis_enabled) {
+    runtime_toolchains += [
+      [platform_name_console2, toolchain_console2,],
+    ]
+  }
 } else if (host_platform_is_win_x64) {
+  declare_args() {
+    win32_enabled = true
+    nx_enabled = true
+    orbis_enabled = true
+  }
   toolchain_win_x64 = toolchain_win_x64_msvc
   toolchain_win_x86 = toolchain_win_x86_msvc
 
   runtime_toolchains = [
     [platform_name_win_x64, toolchain_win_x64, ],
-    [platform_name_win_x86, toolchain_win_x86, ],
-    [platform_name_console1, toolchain_console1,],
-    [platform_name_console2, toolchain_console2,],
   ]
+  if (win32_enabled) {
+    runtime_toolchains += [
+      [platform_name_win_x86, toolchain_win_x86, ],
+    ]
+  }
+  if (nx_enabled) {
+    runtime_toolchains += [
+      [platform_name_console1, toolchain_console1,],
+    ]
+  }
+  if (orbis_enabled) {
+    runtime_toolchains += [
+      [platform_name_console2, toolchain_console2,],
+    ]
+  }
 }
 
 # Set default toolchain

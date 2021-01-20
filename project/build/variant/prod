@@ -1,2 +1,5 @@
+win32_enabled = false
+nx_enabled = true
+orbis_enabled = true
+
 assert_enabled = false
-csharp_enabled = true
